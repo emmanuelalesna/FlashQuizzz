@@ -1,28 +1,50 @@
-# FlashQuizzz
+# React + TypeScript + Vite
 
-![Process Flow](./Project3-FlashQuizz.jpeg "Process flow of FlashQuizzz")
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Project Overview
-The flashcard application is designed to help users create, manage, and take quizzes using a set of flashcards. The backend is built using ASP.NET Core with Entity Framework for data management, while the frontend is implemented using React.
+Currently, two official plugins are available:
 
-## MVP Features
-1. User Authentication:
-    * Users will be able to create an account or log in.
-    * Secure authentication mechanism to ensure user data privacy.
-    * Use Microsoft identity framework.
-2. Manage questions:
-    * Authenticated users will allow to do CRUD on the questions.
-    * Allow users to read the cards in a random order and flip them.
-3. CI/CD Pipeline.
-4. Frontend and Backend hosted on Azure Cloud Services.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
+## Expanding the ESLint configuration
 
-## ERD (Entity-Relationship Diagram)
-![Entity Relationship Diagram](./Project3-FlashQuizz-ERD.jpeg "Entity Relationship Diagram of FlashQuizzz")
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-## Stretch Goals
-1. Have a service that randomly generates quizzes based on the flashcards.
-2. Make it look nice with React.
+- Configure the top-level `parserOptions` property like this:
 
-## Conclusion
-This project cover the main points in the curriculum we follow in the cohort "240708-NET-FS" of Revature.
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
+
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
