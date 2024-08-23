@@ -16,8 +16,8 @@ describe("Register Form", () => {
     const submitButton = screen.getByText("Submit");
     const resetButton = screen.getByText("Reset Fields");
 
-    //expect(submitButton).toBeInTheDocument();
-    // expect(resetButton).toBeInTheDocument();
+    expect(submitButton).toBeInTheDocument();
+    expect(resetButton).toBeInTheDocument();
   });
 
   test("Register form submit button calls event handler", () => {
