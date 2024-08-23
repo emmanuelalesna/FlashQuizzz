@@ -9,9 +9,14 @@ import RegisterForm from "../RegisterForm";
 
 describe("Register Form", () => {
   test("register form renders properly", () => {
+    // arrange
     render(<RegisterForm />);
 
-    //assert
+    const submitButton = screen.getByText("Submit");
+    const resetButton = screen.getByText("Reset Fields");
+
+    //expect(submitButton).toBeInTheDocument();
+    // expect(resetButton).toBeInTheDocument();
   });
 
   test("Register form submit button calls event handler", () => {
