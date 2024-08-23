@@ -5,13 +5,13 @@ import FormState from "../../interfaces/IFormState";
 import UserService from "../../services/UserService";
 
 type ActionType =
-  | { type: "setUserName"; payload: string }
+  | { type: "setEmail"; payload: string }
   | { type: "setPassword"; payload: string };
 
 function formReducer(state: FormState, action: ActionType): FormState {
   switch (action.type) {
-    case "setUserName":
-      return { ...state, userName: action.payload };
+    case "setEmail":
+      return { ...state, email: action.payload };
     case "setPassword":
       return { ...state, password: action.payload };
     default:
@@ -21,24 +21,22 @@ function formReducer(state: FormState, action: ActionType): FormState {
 
 function LoginForm() {
   const [state, dispatch] = useReducer(formReducer, {
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
   });
 
-  function handleUserNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ type: "setUserName", payload: event?.target.value });
+  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({ type: "setEmail", payload: event?.target.value });
   }
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ type: "setLastName", payload: event?.target.value });
+    dispatch({ type: "setPassword", payload: event?.target.value });
   }
-  
+
   async function submit() {
     try {
-      const response = await UserService.register(state);
+      const response = await UserService.login(state);
       if (response.status) {
-        console.log("registered")
+        console.log("Logged In")
       }
     } catch (error) {
       console.error("Error submitting user data", error);
@@ -48,11 +46,11 @@ return (
     <div>
       <h3>Log In</h3>
       <div>
-        <label>User Name:</label>
+        <label>Email:</label>
         <input
           type="text"
-          value={state.userName}
-          onChange={handleUserNameChange}
+          value={state.email}
+          onChange={handleEmailChange}
         />
       </div>
       <div>
@@ -65,7 +63,7 @@ return (
       </div>
       <button onClick={submit}>Submit</button>
       <div>
-        {state.UserName}
+        {state.email}
         {state.Password}
       </div>
     </div>

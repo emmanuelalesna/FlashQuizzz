@@ -7,9 +7,14 @@ class UserService {
     return axios.post(url, {
       firstName: userInfo.firstName,
       lastName: userInfo.lastName,
-      email: userInfo.lastName,
+      email: userInfo.email,
       password: userInfo.password,
-      userName: userInfo.userName
+    });
+  }
+  static login(userInfo: FormState): Promise<AxiosResponse> {
+    return axios.post(url, {
+      email: userInfo.email,
+      password: userInfo.password
     });
   }
 }
