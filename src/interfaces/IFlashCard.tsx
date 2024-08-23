@@ -3,7 +3,7 @@ interface IFlashCard {
         FlashCardID: number,
         FlashCardQuestion: string,
         FlashCardAnswer: string,
-        CreatedDate: Date,
+        CreatedDate: number,
     }
 }
 export default IFlashCard;

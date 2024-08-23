@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
-import RegisterFormState from "../../interfaces/IRegisterFormState";
-import UserService from "../../services/UserService";
+import RegisterFormState from "../../../interfaces/IRegisterFormState";
+import UserService from "../../../services/UserService";
 
 type ActionType =
   | { type: "setFirstName"; payload: string }
@@ -29,7 +29,7 @@ function formReducer(
   }
 }
 
-function RegisterForm(userService: UserService) {
+function RegisterForm(userService) {
   const [state, dispatch] = useReducer(formReducer, {
     FirstName: "",
     LastName: "",

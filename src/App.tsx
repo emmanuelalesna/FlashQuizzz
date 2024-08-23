@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import RegisterForm from './components/RegisterForm/RegisterForm'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import RegisterForm from "./components/forms/RegisterForm/RegisterForm";
+import UserService from "./services/UserService";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <BrowserRouter>
@@ -31,12 +32,13 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <Routes>
-        <Route path='/register' element={<RegisterForm/>}>
-          
-        </Route>
+        <Route
+          path="/register"
+          element={<RegisterForm userService={new UserService()} />}
+        ></Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
