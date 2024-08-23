@@ -4,7 +4,7 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 
-import { test, expect, describe } from "@jest/globals";
+import { test, describe } from "@jest/globals";
 import RegisterForm from "../RegisterForm";
 
 describe("Register Form", () => {
