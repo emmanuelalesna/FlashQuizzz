@@ -7,7 +7,7 @@ function AnswerFetcher() {
   const [answers, setAnswers] = useState<IAnswer[] | null>([]);
 
   useEffect(() => {
-    async function fetchQuestions() {
+    async function fetchAnswers() {
       try {
         const response = await axios.get(url);
         setAnswers(response.data);
@@ -15,7 +15,7 @@ function AnswerFetcher() {
         console.error("Error fetching answers: ", error);
       }
     }
-    fetchQuestions();
+    fetchAnswers();
   }, []);
   return (
     <div>
