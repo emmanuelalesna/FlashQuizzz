@@ -9,7 +9,10 @@ type ActionType =
   | { type: "setPassword"; payload: string }
   | { type: "reset" };
 
-function formReducer(state: RegisterFormState, action: ActionType): RegisterFormState {
+function formReducer(
+  state: RegisterFormState,
+  action: ActionType
+): RegisterFormState {
   switch (action.type) {
     case "setFirstName":
       return { ...state, FirstName: action.payload };
@@ -26,7 +29,7 @@ function formReducer(state: RegisterFormState, action: ActionType): RegisterForm
   }
 }
 
-function RegisterForm() {
+function RegisterForm(userService: UserService) {
   const [state, dispatch] = useReducer(formReducer, {
     FirstName: "",
     LastName: "",
@@ -49,12 +52,12 @@ function RegisterForm() {
   function handleReset() {
     dispatch({ type: "reset" });
   }
-  
+
   async function submit() {
     try {
-      const response = await UserService.register(state);
+      const response = await userService.register(state);
       if (response.status) {
-        console.log("registered")
+        console.log("registered");
       }
     } catch (error) {
       console.error("Error submitting user data", error);
