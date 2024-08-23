@@ -4,7 +4,7 @@ export default {
   transform: {
     "^.+.tsx?$": ["ts-jest", {}],
   },
-  moduleFileExtensions: ["ts", "tsx", "js"],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   collectCoverage: true,
   coverageReporters: ["json", "html", "text"],
   coverageThreshold: {
