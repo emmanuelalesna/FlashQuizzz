@@ -4,6 +4,7 @@ interface FormState {
     lastName: string;
     email: string;
     password: string;
+    userName: string;
   }
 
   export default FormState;

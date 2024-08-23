@@ -9,6 +9,7 @@ class UserService {
       lastName: userInfo.lastName,
       email: userInfo.lastName,
       password: userInfo.password,
+      userName: userInfo.userName
     });
   }
 }
