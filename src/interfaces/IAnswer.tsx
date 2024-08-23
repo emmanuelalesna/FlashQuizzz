@@ -1,6 +1,8 @@
 interface IAnswer {
+  answer: {
     id: number;
     name: string;
+  };
 }
 
-export default IAnswer
+export default IAnswer;
