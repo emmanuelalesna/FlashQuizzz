@@ -17,7 +17,7 @@ class UserService {
     if (userInfo.Password.length == 0) {
       throw new Error("Password cannot be empty.");
     }
-    return axios.post(url + "user/register", {
+    return axios.post(url + "/user/register", {
       FirstName: userInfo.FirstName,
       LastName: userInfo.LastName,
       Email: userInfo.Email,
@@ -25,7 +25,7 @@ class UserService {
     });
   }
   login(userInfo: LoginFormState): Promise<AxiosResponse> {
-    return axios.post(url, {
+    return axios.post(url + "/user/login", {
       email: userInfo.email,
       password: userInfo.password,
     });
