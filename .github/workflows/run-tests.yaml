@@ -14,5 +14,5 @@ jobs:
           node-version: "lts/*"
       - name: test
         run: |
-          npm ci
+          npm install
           npm test
