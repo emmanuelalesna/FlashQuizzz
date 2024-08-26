@@ -22,7 +22,7 @@ function formReducer(
   }
 }
 
-function LoginForm() {
+function LoginForm({ userService }: { userService: UserService }) {
   const [state, dispatch] = useReducer(formReducer, {
     email: "",
     password: "",
@@ -37,7 +37,7 @@ function LoginForm() {
 
   async function submit() {
     try {
-      const response = await UserService.login(state);
+      const response = await userService.login(state);
       if (response.status) {
         console.log("Logged In");
       }
@@ -63,7 +63,7 @@ function LoginForm() {
       <button onClick={submit}>Submit</button>
       <div>
         {state.email}
-        {state.Password}
+        {state.password}
       </div>
     </div>
   );
