@@ -20,7 +20,7 @@ class UserService {
     return axios.post(url + "user/register", {
       FirstName: userInfo.FirstName,
       LastName: userInfo.LastName,
-      Email: userInfo.LastName,
+      Email: userInfo.Email,
       Password: userInfo.Password,
     });
   }
