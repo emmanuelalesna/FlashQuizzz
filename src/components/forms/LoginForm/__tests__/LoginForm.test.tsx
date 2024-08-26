@@ -21,12 +21,15 @@ describe("Login Form", () => {
     const submitButton = screen.getByText("Submit");
 
     const serviceSpy = jest.spyOn(UserService, "login");
+
+    // act: click submit button
     const click = () => userEvent.click(submitButton);
     try {
       await click();
     } catch {
-     // expect(serviceSpy).toHaveBeenCalled(); // should throw error
+      // expect(serviceSpy).toHaveBeenCalled(); // should throw error
     } finally {
+      // assert: the spy should have been calld
       expect(serviceSpy).toHaveBeenCalled();
     }
   });
