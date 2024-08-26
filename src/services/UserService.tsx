@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import RegisterFormState from "../interfaces/IRegisterFormState";
+import LoginFormState from "../interfaces/ILoginFormState";
 import { url } from "../url.json";
 
 class UserService {
@@ -23,7 +24,7 @@ class UserService {
       Password: userInfo.Password,
     });
   }
-  static login(userInfo: FormState): Promise<AxiosResponse> {
+  static login(userInfo: LoginFormState): Promise<AxiosResponse> {
     return axios.post(url, {
       email: userInfo.email,
       password: userInfo.password,
