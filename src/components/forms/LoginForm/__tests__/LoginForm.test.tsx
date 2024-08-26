@@ -9,7 +9,7 @@ import LoginForm from "../LoginForm";
 describe("Login Form", () => {
   test("login form renders properly", () => {
     // arrange
-    render(<LoginForm />);
+    render(<LoginForm userService={new UserService()}/>);
 
     // assert
     expect(screen.getByText("Submit")).toBeInTheDocument();
@@ -17,10 +17,11 @@ describe("Login Form", () => {
 
   test("login form submit button calls event handler", async () => {
     // arrange: render component and grab submit button
-    render(<LoginForm />);
+    const userService = new UserService();
+    render(<LoginForm userService={userService} />);
     const submitButton = screen.getByText("Submit");
 
-    const serviceSpy = jest.spyOn(UserService, "login");
+    const serviceSpy = jest.spyOn(userService, "login");
 
     // act: click submit button
     const click = () => userEvent.click(submitButton);

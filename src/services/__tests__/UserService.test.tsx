@@ -95,7 +95,7 @@ describe("User Service", () => {
         Email: "johnsmith@revature.net",
         Password: "Password",
       };
-      const finalUrl = url + "user/register";
+      const finalUrl = url + "/user/register";
       // arrange: creat mock axios implementation
       const userService = new UserService();
       const axiosCallMock = (url: string, data: unknown): Promise<object> =>
@@ -127,7 +127,7 @@ describe("User Service", () => {
         password: "password",
       };
 
-      const finalUrl = url;
+      const finalUrl = url + "/user/login";
 
       const axiosCallMock = (url: string, data: unknown): Promise<object> =>
         Promise.resolve({

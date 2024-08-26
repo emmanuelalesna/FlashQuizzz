@@ -13,7 +13,7 @@ describe("Flash Card Service", () => {
           FlashCardQuestion: "",
           FlashCardAnswer: "",
           FlashCardID: 1,
-          CreatedDate: Date.now(),
+          CreatedDate: new Date(Date.now()),
         },
       };
 
@@ -27,19 +27,46 @@ describe("Flash Card Service", () => {
     });
   });
 
-  describe("get flash cards", async () => {
+  describe("get flash cards", () => {
     // arrange: create mock axios implementation
-    const axiosCallMock = (url: string): Promise<object> =>
-      Promise.resolve({ data: [], config: { url: url } });
-    const axiosMock = axios.post as jest.MockedFunction<typeof axios.post>;
-    axiosMock.mockImplementation(axiosCallMock);
+    test("calls axios with correct url", async () => {
+      const axiosCallMock = (url: string): Promise<object> =>
+        Promise.resolve({ data: [], config: { url: url } });
+      const axiosMock = axios.get as jest.MockedFunction<typeof axios.post>;
+      axiosMock.mockImplementation(axiosCallMock);
 
-    // act: invoke getFlashCards
-    const response = await new FlashCardService().getFlashCards();
-    const calledURL = response.config.url;
+      // act: invoke getFlashCards
+      const response = await new FlashCardService().getFlashCards();
+      const calledURL = response.config.url;
 
-    // assert: mock should have been invoked with correct url
-    expect(axiosMock).toHaveBeenCalled();
-    expect(calledURL).toEqual(url + "flash-cards");
+      // assert: mock should have been invoked with correct url
+      expect(axiosMock).toHaveBeenCalled();
+      expect(calledURL).toEqual(url + "flash-cards");
+    });
+  });
+
+  describe("post flash card", () => {
+    test("calls axios with correct url", async () => {
+      const flashCard: IFlashCard = {
+        FlashCard: {
+          FlashCardQuestion: "Question",
+          FlashCardAnswer: "Answer",
+          FlashCardID: 1,
+          CreatedDate: new Date(Date.now()),
+        },
+      }
+      const axiosCallMock = (url: string): Promise<object> =>
+        Promise.resolve({ data: flashCard, config: { url: url } });
+      const axiosMock = axios.post as jest.MockedFunction<typeof axios.post>;
+      axiosMock.mockImplementation(axiosCallMock);
+
+      // act: invoke postFlashCard
+      const response = await new FlashCardService().postFlashCard(flashCard);
+      const calledURL = response.config.url;
+
+      //assert: mock should have been invoked with correct url
+      expect(axiosMock).toHaveBeenCalled();
+      expect(calledURL).toEqual(url + "flash-cards");
+    });
   });
 });
