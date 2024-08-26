@@ -4,18 +4,26 @@ import FlashCardService from "../../../services/FlashCardService";
 import IFlashCard from "../../../interfaces/IFlashCard";
 
 type ActionType =
-  | { type: "setQuestion"; payload: string }
-  | { type: "setAnswer"; payload: string }
-  | { type: "reset" };
+  | {
+      type: "editQuestion";
+      payload: string;
+    }
+  | {
+      type: "editAnswer";
+      payload: string;
+    }
+  | {
+      type: "reset";
+    };
 
 function formReducer(
   state: ICreateFlashCardFormState,
   action: ActionType
 ): ICreateFlashCardFormState {
   switch (action.type) {
-    case "setQuestion":
+    case "editQuestion":
       return { ...state, FlashCardQuestion: action.payload };
-    case "setAnswer":
+    case "editAnswer":
       return { ...state, FlashCardAnswer: action.payload };
     case "reset":
       return { FlashCardQuestion: "", FlashCardAnswer: "" };
@@ -24,21 +32,22 @@ function formReducer(
   }
 }
 
-function AddFlashCardForm({
-  flashCardService,
-}: {
-  flashCardService: FlashCardService;
-}) {
+function EditFlashCardForm(
+  props: {
+    flashCard: IFlashCard["FlashCard"];
+    flashCardService: FlashCardService;
+  }
+) {
   const [state, dispatch] = useReducer(formReducer, {
     FlashCardQuestion: "",
     FlashCardAnswer: "",
   });
 
   function handleQuestionChange(event: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ type: "setQuestion", payload: event?.target.value });
+    dispatch({ type: "editQuestion", payload: event?.target.value });
   }
   function handleAnswerChange(event: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ type: "setAnswer", payload: event?.target.value });
+    dispatch({ type: "editAnswer", payload: event?.target.value });
   }
   function handleReset() {
     dispatch({ type: "reset" });
@@ -46,16 +55,17 @@ function AddFlashCardForm({
 
   async function handleSubmit() {
     try {
-      const cardToPost: IFlashCard = {
+      const cardToPatch: IFlashCard = {
         FlashCard: {
+          FlashCardID: props.flashCard.FlashCardID,
           FlashCardQuestion: state.FlashCardQuestion,
           FlashCardAnswer: state.FlashCardAnswer,
           CreatedDate: new Date(),
         },
       };
-      const response = await flashCardService.postFlashCard(cardToPost);
+      const response = await props.flashCardService.patchFlashCard(cardToPatch);
       if (response.status) {
-        console.log("flash card posted");
+        console.log("flash card patched");
       }
     } catch (error) {
       console.error("Error submitting flash card: ", error);
@@ -64,29 +74,43 @@ function AddFlashCardForm({
 
   return (
     <div>
-      <h3>Add a flash card</h3>
+      <h3>Edit a flash card</h3>
       <form>
-        <label>Question:</label>
+        <p>Card ID: {props.flashCard.FlashCardID}</p>
+        <label>Question: </label>
         <input
           type="text"
+          name="question"
           value={state.FlashCardQuestion}
           onChange={handleQuestionChange}
         />
-        <label>Answer:</label>
+        <br />
+        <label>Answer: </label>
         <input
           type="text"
+          name="answer"
           value={state.FlashCardAnswer}
           onChange={handleAnswerChange}
         />
-        <button onClick={handleReset}>Reset Fields</button>
-        <button onClick={handleSubmit}>Submit</button>
+        <br />
+        <button type="button" onClick={handleReset}>
+          Reset
+        </button>
+        <button type="submit" onClick={handleSubmit}>
+          Submit
+        </button>
       </form>
       <div>
-        {state.FlashCardQuestion}
-        {state.FlashCardAnswer}
+        {props.flashCard.FlashCardID}
+        <p></p>
+        {props.flashCard.FlashCardQuestion}
+        <p></p>
+        {props.flashCard.FlashCardAnswer}
+        <p></p>
+        {props.flashCard.CreatedDate.toString()}
       </div>
     </div>
   );
 }
 
-export default AddFlashCardForm;
+export default EditFlashCardForm;

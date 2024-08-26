@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import FlashcardService from "../../services/FlashCardService";
 import IFlashCard from "../../interfaces/IFlashCard";
 import FlashCardComponent from "../FlashCardComponent/FlashCardComponent";
+import React from "react";
 
 function FlashCardFetcher(flashcardService: FlashcardService) {
   const [flashCards, setFlashCards] = useState<IFlashCard[]>([]);

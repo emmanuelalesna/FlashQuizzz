@@ -1,9 +1,9 @@
 interface IFlashCard {
     FlashCard: {
-        FlashCardID: number,
+        FlashCardID?: number,
         FlashCardQuestion: string,
         FlashCardAnswer: string,
-        CreatedDate: number,
+        CreatedDate: Date,
     }
 }
 export default IFlashCard;
