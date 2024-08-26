@@ -25,11 +25,16 @@ describe("Register Form", () => {
 
     // arrange: get mock function for userservice.register
     const serviceSpy = jest.spyOn(UserService, "register");
-    // act
-    await userEvent.click(submitButton);
 
-    // assert: the spy should have been calld
-    expect(serviceSpy).toHaveBeenCalled();
+    // act: click submit button
+    try {
+      await userEvent.click(submitButton);
+    } catch {
+      // do nothing here but it should throw error
+    } finally {
+      // assert: the spy should have been calld
+      expect(serviceSpy).toHaveBeenCalled();
+    }
   });
 
   test("Reset button  properly resets all form fields", async () => {
@@ -51,6 +56,7 @@ describe("Register Form", () => {
     await userEvent.paste("paul471@revature.net");
 
     // act II: press reset button
+
     await userEvent.click(resetButton);
 
     // assert

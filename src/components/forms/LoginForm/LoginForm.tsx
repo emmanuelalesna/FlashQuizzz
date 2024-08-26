@@ -1,8 +1,7 @@
-import axios from "axios";
 import React, { useReducer } from "react";
-import { url } from "../../url.json";
-import LoginFormState from "../../interfaces/ILoginFormState";
-import UserService from "../../services/UserService";
+import { url } from "../../../url.json";
+import LoginFormState from "../../../interfaces/ILoginFormState";
+import UserService from "../../../services/UserService";
 
 type ActionType =
   | { type: "setEmail"; payload: string }
@@ -63,7 +62,7 @@ function LoginForm() {
       <button onClick={submit}>Submit</button>
       <div>
         {state.email}
-        {state.Password}
+        {state.password}
       </div>
     </div>
   );
