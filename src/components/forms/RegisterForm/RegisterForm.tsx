@@ -29,7 +29,7 @@ function formReducer(
   }
 }
 
-function RegisterForm(userService) {
+function RegisterForm() {
   const [state, dispatch] = useReducer(formReducer, {
     FirstName: "",
     LastName: "",
@@ -55,7 +55,7 @@ function RegisterForm(userService) {
 
   async function submit() {
     try {
-      const response = await userService.register(state);
+      const response = await UserService.register(state);
       if (response.status) {
         console.log("registered");
       }
