@@ -5,7 +5,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "types": ["node", "jest", "@testing-library/jest-dom"],
+  "types": ["node", "jest", "testing-library/jest-dom"],
+  "typeRoots": ["node_modules/@types", "node_modules/@testing-library"],
 
   "references": [
     { "path": "./tsconfig.app.json" },

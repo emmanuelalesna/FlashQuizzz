@@ -3,7 +3,7 @@ import RegisterFormState from "../interfaces/IRegisterFormState";
 import { url } from "../url.json";
 
 class UserService {
-  register(userInfo: RegisterFormState): Promise<AxiosResponse> {
+  static register(userInfo: RegisterFormState): Promise<AxiosResponse> {
     if (userInfo.FirstName.length == 0) {
       throw new Error("First name cannot be empty.");
     }
@@ -26,7 +26,7 @@ class UserService {
   static login(userInfo: FormState): Promise<AxiosResponse> {
     return axios.post(url, {
       email: userInfo.email,
-      password: userInfo.password
+      password: userInfo.password,
     });
   }
 }

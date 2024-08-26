@@ -1,10 +1,10 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
 export default {
-  testEnvironment: "node",
+  testEnvironment: "jsdom",
   transform: {
-    "^.+.tsx?$": ["ts-jest", {}],
+    "^.+\\.tsx?$": "ts-jest",
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
+  moduleFileExtensions: ["ts", "tsx", "js"],
   collectCoverage: true,
   coverageReporters: ["json", "html", "text"],
   coverageThreshold: {
