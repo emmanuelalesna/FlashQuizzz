@@ -1,3 +1,4 @@
+import React from "react";
 import IFlashCard from "../../interfaces/IFlashCard";
 
 function FlashCardComponent({ FlashCard }: IFlashCard) {
@@ -8,7 +9,7 @@ function FlashCardComponent({ FlashCard }: IFlashCard) {
         <p>{FlashCard.FlashCardID}</p>
         <p>{FlashCard.FlashCardQuestion}</p>
         <p>{FlashCard.FlashCardAnswer}</p>
-        <p>{FlashCard.CreatedDate.toISOString()}</p>
+        <p>{FlashCard.CreatedDate.toString()}</p>
       </li>
     </div>
   );
