@@ -29,7 +29,7 @@ function formReducer(
   }
 }
 
-function RegisterForm() {
+function RegisterForm({ userService }: { userService: UserService }) {
   const [state, dispatch] = useReducer(formReducer, {
     FirstName: "",
     LastName: "",
@@ -53,7 +53,7 @@ function RegisterForm() {
     dispatch({ type: "reset" });
   }
 
-  async function submit() {
+  async function handleFormSubmit() {
     try {
       const response = await UserService.register(state);
       if (response.status) {
@@ -95,7 +95,9 @@ function RegisterForm() {
           onChange={handlePasswordChange}
         />
       </div>
-      <button onClick={submit}>Submit</button>
+      <input type="submit" onClick={handleFormSubmit}>
+        Submit
+      </input>
       <button onClick={handleReset}>Reset Fields</button>
       <div>
         {state.FirstName}
