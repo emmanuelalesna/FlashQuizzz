@@ -1,8 +1,4 @@
-/**
- * @jest-environment jsdom
- */
 import "@testing-library/jest-dom";
-import '@testing-library/jest-dom/matchers'
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { test, expect, describe } from "@jest/globals";
@@ -17,7 +13,7 @@ describe("Register Form", () => {
 
     const submitButton = screen.getByText("Submit");
     const resetButton = screen.getByText("Reset Fields");
-   
+
     expect(submitButton).toBeInTheDocument();
     expect(resetButton).toBeInTheDocument();
   });
@@ -58,7 +54,7 @@ describe("Register Form", () => {
     await userEvent.click(resetButton);
 
     // assert
-    
+
     expect(firstNameField).toHaveValue("");
     expect(lastNameField).toHaveValue("");
     expect(emailField).toHaveValue("");
