@@ -55,7 +55,7 @@ function RegisterForm({ userService }: { userService: UserService }) {
 
   async function handleFormSubmit() {
     try {
-      const response = await userService.register(state);
+      const response = await UserService.register(state);
       if (response.status) {
         console.log("registered");
       }

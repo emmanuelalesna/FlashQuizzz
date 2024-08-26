@@ -7,7 +7,7 @@ class FlashCardService {
   getFlashCards(): Promise<AxiosResponse> {
     return axios.get(url + "flash-cards/TO-UPDATE", {
       headers: {
-        "Authorization": localStorage.getItem("access-token"),
+        Authorization: localStorage.getItem("access-token"),
       },
     });
   }
@@ -15,16 +15,16 @@ class FlashCardService {
   postFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
     if (
       FlashCard.FlashCardID == null ||
-      FlashCard.FlashCardQuestion == null ||
-      FlashCard.FlashCardAnswer == null ||
+      FlashCard.FlashCardQuestion == "" ||
+      FlashCard.FlashCardAnswer == "" ||
       FlashCard.CreatedDate == null
     ) {
       throw new Error("Flash card information is incomplete.");
     }
     return axios.post(url + "flash-cards/TO-UPDATE", {
-      body: JSON.stringify(FlashCard),
+      body: FlashCard,
       headers: {
-        "Authorization": localStorage.getItem("access-token"),
+        Authorization: localStorage.getItem("access-token"),
       },
     });
   }

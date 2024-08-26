@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 import RegisterFormState from "../interfaces/IRegisterFormState";
+import LoginFormState from "../interfaces/ILoginFormState";
 import { url } from "../url.json";
 
 class UserService {
-  register(userInfo: RegisterFormState): Promise<AxiosResponse> {
+  static register(userInfo: RegisterFormState): Promise<AxiosResponse> {
     if (userInfo.FirstName.length == 0) {
       throw new Error("First name cannot be empty.");
     }
@@ -19,8 +20,14 @@ class UserService {
     return axios.post(url + "user/register", {
       FirstName: userInfo.FirstName,
       LastName: userInfo.LastName,
-      Email: userInfo.LastName,
+      Email: userInfo.Email,
       Password: userInfo.Password,
+    });
+  }
+  static login(userInfo: LoginFormState): Promise<AxiosResponse> {
+    return axios.post(url, {
+      email: userInfo.email,
+      password: userInfo.password,
     });
   }
 }
