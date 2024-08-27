@@ -5,7 +5,8 @@ import { expect, describe, it } from "@jest/globals";
 import UserService from "../../../../services/UserService";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "../LoginForm";
-
+import axios from "axios";
+jest.mock("axios");
 describe("Login Form", () => {
   it("renders properly", () => {
     // arrange

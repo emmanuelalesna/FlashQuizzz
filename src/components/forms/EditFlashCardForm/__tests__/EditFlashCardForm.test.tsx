@@ -17,14 +17,15 @@ describe("Edit Flash Card Form", () => {
         CreatedDate: new Date(Date.now()),
       },
     };
+    const flashCardService = new FlashCardService();
     render(
       <EditFlashCardForm
-        flashCardService={new FlashCardService()}
+        flashCardService={flashCardService}
         flashCard={flashCard.FlashCard}
       />
     );
 
-    jest.spyOn(FlashCardService.prototype, "putFlashCard");
+    jest.spyOn(flashCardService, "putFlashCard");
 
     expect(screen.getByText("Question")).toBeInTheDocument();
     expect(screen.getByText("Answer")).toBeInTheDocument();
