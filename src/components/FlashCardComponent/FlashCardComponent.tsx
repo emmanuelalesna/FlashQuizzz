@@ -32,7 +32,6 @@ function FlashCardComponent({ FlashCard }: IFlashCard) {
   return (
     <div>
       <li>
-        <h3>Question:</h3>
         <p>{FlashCard.FlashCardID}</p>
         <p>{FlashCard.FlashCardQuestion}</p>
         <p>{FlashCard.FlashCardAnswer}</p>

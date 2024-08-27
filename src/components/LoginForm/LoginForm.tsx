@@ -55,16 +55,12 @@ function LoginForm({ userService }: { userService: UserService }) {
       <div>
         <label>Password:</label>
         <input
-          type="text"
+          type="password"
           value={state.password}
           onChange={handlePasswordChange}
         />
       </div>
       <button onClick={submit}>Submit</button>
-      <div>
-        {state.email}
-        {state.password}
-      </div>
     </div>
   );
 }

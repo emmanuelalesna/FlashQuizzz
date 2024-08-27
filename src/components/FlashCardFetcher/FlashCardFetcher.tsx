@@ -26,7 +26,7 @@ function FlashCardFetcher({
     <div>
       <h3>Flash cards here:</h3>
       <ul>
-        {flashCards ? (
+        {flashCards.length > 0 ? (
           flashCards.map((item, index) => (
             <FlashCardComponent key={index} FlashCard={item} />
           ))

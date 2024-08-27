@@ -1,25 +1,30 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RegisterForm from "./components/forms/RegisterForm/RegisterForm";
-import UserService from "./services/UserService";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import React from "react";
-import EditFlashCardForm from "./components/forms/EditFlashCardForm/EditFlashCardForm";
-import FlashCardService from "./services/FlashCardService";
-import IFlashCard from "./interfaces/IFlashCard";
-import FlashCardFetcher from "./components/FlashCardFetcher/FlashCardFetcher";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import MyCardsPage from "./pages/MyCardsPage/MyCardsPage";
 
 function App() {
   return (
     <BrowserRouter>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/my-cards">My Cards</Link>
+      </nav>
+
       <Routes>
         {/* Landing page */}
-        <Route path="/" />
+        <Route path="/" element={<LandingPage />} />
         {/* Registration page */}
-        <Route path="/register" />
+        <Route path="/register" element={<RegisterPage />} />
         {/* Login page */}
-        <Route path="/login" />
+        <Route path="/login" element={<LoginPage />} />
         {/* View all cards page */}
-        <Route path="/my-cards" />
+        <Route path="/my-cards" element={<MyCardsPage />} />
       </Routes>
     </BrowserRouter>
   );
