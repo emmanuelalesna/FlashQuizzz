@@ -4,8 +4,8 @@ import UserService from "../../services/UserService";
 
 function LoginPage() {
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="container mt-4">
+      <h2>Login</h2>
       <LoginForm userService={new UserService} />
     </div>
   );
