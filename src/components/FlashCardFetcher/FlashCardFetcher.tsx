@@ -22,46 +22,18 @@ function FlashCardFetcher({
     }
     fetchFlashCards();
   }, [flashCardService]);
-  const flashCardsTest: IFlashCard["FlashCard"][] = [
-    {
-      FlashCardID: 2,
-      FlashCardQuestion: "Hello",
-      FlashCardAnswer: "world",
-      CreatedDate: new Date(),
-    },
-    {
-      FlashCardID: 3,
-      FlashCardQuestion: "and all",
-      FlashCardAnswer: "who",
-      CreatedDate: new Date(),
-    },
-    {
-      FlashCardID: 4,
-      FlashCardQuestion: "inhabit",
-      FlashCardAnswer: "it",
-      CreatedDate: new Date(),}
-  ];
   return (
     <div>
       <h3>Flash cards here:</h3>
       <ul>
-        {flashCardsTest ? (
-          flashCardsTest.map((item, index) => (
+        {flashCards ? (
+          flashCards.map((item, index) => (
             <FlashCardComponent key={index} FlashCard={item} />
           ))
         ) : (
           <p>Flash cards loading...</p>
         )}
       </ul>
-      {/* <ul>
-        {flashCards ? (
-          flashCards.map((item, index) => (
-            <FlashCardComponent key={index} FlashCard={item.FlashCard} />
-          ))
-        ) : (
-          <p>Flash cards loading...</p>
-        )}
-      </ul> */}
       <p></p>
     </div>
   );

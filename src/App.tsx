@@ -9,30 +9,17 @@ import IFlashCard from "./interfaces/IFlashCard";
 import FlashCardFetcher from "./components/FlashCardFetcher/FlashCardFetcher";
 
 function App() {
-  const flashCardTest: IFlashCard["FlashCard"] = {
-    FlashCardID: 1,
-    FlashCardQuestion: "What is React?",
-    FlashCardAnswer: "A library for managing user interfaces",
-    CreatedDate: new Date(),
-  };
   return (
-    
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/register"
-          element={<RegisterForm userService={new UserService()} />}
-        />
-        <Route
-          path="/edit-card"
-          element={
-            <EditFlashCardForm
-              flashCardService={new FlashCardService()}
-              flashCard={flashCardTest}
-            />
-          }
-        />
-        <Route path="all-cards" element={<FlashCardFetcher flashCardService={new FlashCardService()}/>}/>
+        {/* Landing page */}
+        <Route path="/" />
+        {/* Registration page */}
+        <Route path="/register" />
+        {/* Login page */}
+        <Route path="/login" />
+        {/* View all cards page */}
+        <Route path="/my-cards" />
       </Routes>
     </BrowserRouter>
   );
