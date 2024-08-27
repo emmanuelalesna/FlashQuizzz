@@ -32,12 +32,10 @@ function formReducer(
   }
 }
 
-function EditFlashCardForm(
-  props: {
-    flashCard: IFlashCard["FlashCard"];
-    flashCardService: FlashCardService;
-  }
-) {
+function EditFlashCardForm(props: {
+  flashCard: IFlashCard["FlashCard"];
+  flashCardService: FlashCardService;
+}) {
   const [state, dispatch] = useReducer(formReducer, {
     FlashCardQuestion: "",
     FlashCardAnswer: "",
@@ -55,7 +53,7 @@ function EditFlashCardForm(
 
   async function handleSubmit() {
     try {
-      const cardToPatch: IFlashCard = {
+      const cardToPut: IFlashCard = {
         FlashCard: {
           FlashCardID: props.flashCard.FlashCardID,
           FlashCardQuestion: state.FlashCardQuestion,
@@ -63,7 +61,7 @@ function EditFlashCardForm(
           CreatedDate: new Date(),
         },
       };
-      const response = await props.flashCardService.patchFlashCard(cardToPatch);
+      const response = await props.flashCardService.putFlashCard(cardToPut);
       if (response.status) {
         console.log("flash card patched");
       }

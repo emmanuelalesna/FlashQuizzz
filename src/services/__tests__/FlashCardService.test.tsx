@@ -1,6 +1,6 @@
 import FlashCardService from "../FlashCardService";
 import axios from "axios";
-import { url } from "../../url.json";
+import { url, flashCardEndpoint } from "../../url.json";
 
 import IFlashCard from "../../interfaces/IFlashCard";
 jest.mock("axios");
@@ -41,7 +41,7 @@ describe("Flash Card Service", () => {
 
       // assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
-      expect(calledURL).toEqual(url + "flash-cards");
+      expect(calledURL).toEqual(url + flashCardEndpoint);
     });
   });
 
@@ -54,7 +54,7 @@ describe("Flash Card Service", () => {
           FlashCardID: 1,
           CreatedDate: new Date(Date.now()),
         },
-      }
+      };
       const axiosCallMock = (url: string): Promise<object> =>
         Promise.resolve({ data: flashCard, config: { url: url } });
       const axiosMock = axios.post as jest.MockedFunction<typeof axios.post>;
@@ -66,7 +66,32 @@ describe("Flash Card Service", () => {
 
       //assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
-      expect(calledURL).toEqual(url + "flash-cards");
+      expect(calledURL).toEqual(url + flashCardEndpoint);
+    });
+  });
+
+  describe("put flash card", () => {
+    test("calls axios with correct url", async () => {
+      const flashCard: IFlashCard = {
+        FlashCard: {
+          FlashCardQuestion: "Question",
+          FlashCardAnswer: "Answer",
+          FlashCardID: 1,
+          CreatedDate: new Date(Date.now()),
+        },
+      };
+      const axiosCallMock = (url: string): Promise<object> =>
+        Promise.resolve({ data: flashCard, config: { url: url } });
+      const axiosMock = axios.put as jest.MockedFunction<typeof axios.put>;
+      axiosMock.mockImplementation(axiosCallMock);
+
+      // act: invoke putFlashCard
+      const response = await new FlashCardService().putFlashCard(flashCard);
+      const calledURL = response.config.url;
+
+      //assert: mock should have been invoked with correct url
+      expect(axiosMock).toHaveBeenCalled();
+      expect(calledURL).toEqual(url + flashCardEndpoint);
     });
   });
 });
