@@ -53,7 +53,7 @@ function EditFlashCardForm(props: {
 
   async function handleSubmit() {
     try {
-      const cardToPatch: IFlashCard = {
+      const cardToPut: IFlashCard = {
         FlashCard: {
           FlashCardID: props.flashCard.FlashCardID,
           FlashCardQuestion: state.FlashCardQuestion,
@@ -61,7 +61,7 @@ function EditFlashCardForm(props: {
           CreatedDate: new Date(),
         },
       };
-      const response = await props.flashCardService.putFlashCard(cardToPatch);
+      const response = await props.flashCardService.putFlashCard(cardToPut);
       if (response.status) {
         console.log("flash card patched");
       }

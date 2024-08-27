@@ -8,7 +8,14 @@ import CreateRootDeleteSingleton from "./CreateRootDeleteSingleton";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-function FlashCardComponent({ FlashCard }: IFlashCard) {
+/**
+ * A React component that displays a flashcard with a question, answer, and creation date.
+ *
+ * @param {IFlashCard} FlashCard - The flashcard data to be displayed
+ * @return {JSX.Element} The JSX element representing the flashcard component
+ */
+
+function FlashCardComponent({ FlashCard }: IFlashCard): JSX.Element {
   function showEditCardForm() {
     const root = CreateRootEditSingleton.getInstance();
     root.render(

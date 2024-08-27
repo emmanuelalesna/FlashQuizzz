@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import { url } from "../url.json";
+import { url, flashCardEndpoint } from "../url.json";
 import IFlashCard from "../interfaces/IFlashCard";
 
 //NEEDS TO BE UPDATED
 class FlashCardService {
   getFlashCards(): Promise<AxiosResponse> {
-    return axios.get(url + "/flash-cards/TO-UPDATE", {
+    return axios.get(url + flashCardEndpoint, {
       headers: {
         Authorization: localStorage.getItem("access-token"),
       },
@@ -21,7 +21,7 @@ class FlashCardService {
     ) {
       throw new Error("Flash card information is incomplete.");
     }
-    return axios.post(url + "/flash-cards/TO-UPDATE", {
+    return axios.post(url + flashCardEndpoint, {
       body: FlashCard,
       headers: {
         Authorization: localStorage.getItem("access-token"),
@@ -30,11 +30,15 @@ class FlashCardService {
   }
 
   putFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
-    if (FlashCard.FlashCardQuestion == "" || FlashCard.FlashCardAnswer == "") {
+    if (
+      FlashCard.FlashCardID == null ||
+      FlashCard.FlashCardQuestion == "" ||
+      FlashCard.FlashCardAnswer == "" ||
+      FlashCard.CreatedDate == null
+    ) {
       throw new Error("Flash card information is incomplete.");
     }
-
-    return axios.put(url + "/flash-cards/TO-UPDATE", {
+    return axios.put(url + flashCardEndpoint, {
       body: FlashCard,
       headers: {
         Authorization: localStorage.getItem("access-token"),
