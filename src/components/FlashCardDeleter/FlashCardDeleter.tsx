@@ -10,10 +10,6 @@ function FlashCardDeleter(props: {
     document.getElementById(
       "message"
     )!.innerText = `Are you sure you want to delete flashcard ${props.flashCard.FlashCardID}?`;
-    document.getElementById("question")!.innerText =
-      "Question: " + props.flashCard.FlashCardQuestion;
-    document.getElementById("answer")!.innerText =
-      "Answer: " + props.flashCard.FlashCardAnswer;
   }, [props.flashCard]);
 
   async function deleteFlashCard() {
@@ -32,8 +28,6 @@ function FlashCardDeleter(props: {
       <h3 id="message">
         Are you sure you want to delete flashcard {props.flashCard.FlashCardID}?
       </h3>
-      <p id="question"></p>
-      <p id="answer"></p>
       <button onClick={deleteFlashCard}>Confirm</button>
     </div>
   );

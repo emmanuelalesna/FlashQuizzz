@@ -32,12 +32,10 @@ function formReducer(
   }
 }
 
-function EditFlashCardForm(
-  props: {
-    flashCard: IFlashCard["FlashCard"];
-    flashCardService: FlashCardService;
-  }
-) {
+function EditFlashCardForm(props: {
+  flashCard: IFlashCard["FlashCard"];
+  flashCardService: FlashCardService;
+}) {
   const [state, dispatch] = useReducer(formReducer, {
     FlashCardQuestion: "",
     FlashCardAnswer: "",
@@ -73,45 +71,36 @@ function EditFlashCardForm(
   }
 
   return (
-    <div>
-      <h3>Edit a flash card</h3>
-      <form>
-        <p>Card ID: {props.flashCard.FlashCardID}</p>
-        <label>Question: </label>
-        <input
-          type="text"
-          name="question"
-          value={state.FlashCardQuestion}
-          placeholder={props.flashCard.FlashCardQuestion}
-          onChange={handleQuestionChange}
-        />
-        <br />
-        <label>Answer: </label>
-        <input
-          type="text"
-          name="answer"
-          value={state.FlashCardAnswer}
-          placeholder={props.flashCard.FlashCardAnswer}
-          onChange={handleAnswerChange}
-        />
-        <br />
-        <button type="button" onClick={handleReset}>
-          Reset
-        </button>
-        <button type="submit" onClick={handleSubmit}>
-          Submit
-        </button>
-      </form>
       <div>
-        {props.flashCard.FlashCardID}
-        <p></p>
-        {props.flashCard.FlashCardQuestion}
-        <p></p>
-        {props.flashCard.FlashCardAnswer}
-        <p></p>
-        {props.flashCard.CreatedDate.toString()}
+        <h3>Edit a flash card</h3>
+        <form>
+          <p>Card ID: {props.flashCard.FlashCardID}</p>
+          <label>Question: </label>
+          <input
+            type="text"
+            name="question"
+            value={state.FlashCardQuestion}
+            placeholder={props.flashCard.FlashCardQuestion}
+            onChange={handleQuestionChange}
+          />
+          <br />
+          <label>Answer: </label>
+          <input
+            type="text"
+            name="answer"
+            value={state.FlashCardAnswer}
+            placeholder={props.flashCard.FlashCardAnswer}
+            onChange={handleAnswerChange}
+          />
+          <br />
+          <button type="button" onClick={handleReset}>
+            Reset
+          </button>
+          <button type="submit" onClick={handleSubmit}>
+            Submit
+          </button>
+        </form>
       </div>
-    </div>
   );
 }
 

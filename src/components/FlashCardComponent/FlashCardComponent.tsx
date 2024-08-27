@@ -5,10 +5,11 @@ import FlashCardService from "../../services/FlashCardService";
 import FlashCardDeleter from "../FlashCardDeleter/FlashCardDeleter";
 import CreateRootEditSingleton from "./CreateRootEditSingleton";
 import CreateRootDeleteSingleton from "./CreateRootDeleteSingleton";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 function FlashCardComponent({ FlashCard }: IFlashCard) {
   function showEditCardForm() {
-    document.getElementById("editForm")?.toggleAttribute("hidden");
     const root = CreateRootEditSingleton.getInstance();
     root.render(
       <EditFlashCardForm
@@ -19,7 +20,6 @@ function FlashCardComponent({ FlashCard }: IFlashCard) {
   }
 
   function showDeleteConfirm() {
-    document.getElementById("deleteConfirm")?.toggleAttribute("hidden");
     const root = CreateRootDeleteSingleton.getInstance();
     root.render(
       <FlashCardDeleter
@@ -34,23 +34,28 @@ function FlashCardComponent({ FlashCard }: IFlashCard) {
       <li>
         <h3>Question:</h3>
         <p>{FlashCard.FlashCardID}</p>
-        {/* <p>{FlashCard.FlashCardQuestion}</p>
+        <p>{FlashCard.FlashCardQuestion}</p>
         <p>{FlashCard.FlashCardAnswer}</p>
-        <p>{FlashCard.CreatedDate.toString()}</p> */}
-        <button onClick={showEditCardForm}>Edit</button>
-        <button onClick={showDeleteConfirm}>Delete</button>
-        <div hidden={true} id="editForm">
+        <p>{FlashCard.CreatedDate.toString()}</p>
+
+        <Popup
+          trigger={<button onClick={showEditCardForm}> Edit</button>}
+          modal
+        >
           <EditFlashCardForm
             flashCardService={new FlashCardService()}
             flashCard={FlashCard}
           />
-        </div>
-        <div hidden={true} id="deleteConfirm">
+        </Popup>
+        <Popup
+          trigger={<button onClick={showDeleteConfirm}> Delete</button>}
+          modal
+        >
           <FlashCardDeleter
             flashCardService={new FlashCardService()}
             flashCard={FlashCard}
           />
-        </div>
+        </Popup>
       </li>
     </div>
   );
