@@ -28,9 +28,11 @@ describe("Register Form", () => {
     const serviceSpy = jest.spyOn(userService, "register");
     serviceSpy.mockResolvedValue({} as AxiosResponse);
     const submitButtonClick = () => userEvent.click(submitButton);
+
     // act: click submit button
-    // assert that error is thrown
-    expect(submitButtonClick).toThrowError("Error submitting user data");
+    await submitButtonClick();
+    // assert that the mock function was called
+    expect(serviceSpy).toHaveBeenCalled();
   });
 
   test("Reset button  properly resets all form fields", async () => {
