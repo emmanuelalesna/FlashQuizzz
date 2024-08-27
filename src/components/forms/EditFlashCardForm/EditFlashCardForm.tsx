@@ -99,13 +99,12 @@ function EditFlashCardForm(props: {
         </button>
       </form>
       <div>
-        {props.flashCard.FlashCardID}
-        <p></p>
-        {props.flashCard.FlashCardQuestion}
-        <p></p>
-        {props.flashCard.FlashCardAnswer}
-        <p></p>
-        {props.flashCard.CreatedDate.toString()}
+        <p>{props.flashCard.FlashCardID}</p>
+
+        <p>{props.flashCard.FlashCardQuestion}</p>
+
+        <p> {props.flashCard.FlashCardAnswer}</p>
+        <p>{props.flashCard.CreatedDate.toString()}</p>
       </div>
     </div>
   );

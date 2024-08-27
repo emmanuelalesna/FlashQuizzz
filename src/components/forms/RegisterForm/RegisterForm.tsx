@@ -103,9 +103,8 @@ function RegisterForm({ userService }: { userService: UserService }) {
           onChange={handlePasswordChange}
         />
       </div>
-      <input type="submit" onClick={handleFormSubmit}>
-        Submit
-      </input>
+      <input type="submit" value="Submit" onClick={handleFormSubmit} />
+
       <button onClick={handleReset}>Reset Fields</button>
       <div>
         {state.FirstName}
