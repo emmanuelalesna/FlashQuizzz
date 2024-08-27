@@ -63,7 +63,7 @@ function EditFlashCardForm(
           CreatedDate: new Date(),
         },
       };
-      const response = await props.flashCardService.patchFlashCard(cardToPatch);
+      const response = await props.flashCardService.putFlashCard(cardToPatch);
       if (response.status) {
         console.log("flash card patched");
       }
@@ -82,6 +82,7 @@ function EditFlashCardForm(
           type="text"
           name="question"
           value={state.FlashCardQuestion}
+          placeholder={props.flashCard.FlashCardQuestion}
           onChange={handleQuestionChange}
         />
         <br />
@@ -90,6 +91,7 @@ function EditFlashCardForm(
           type="text"
           name="answer"
           value={state.FlashCardAnswer}
+          placeholder={props.flashCard.FlashCardAnswer}
           onChange={handleAnswerChange}
         />
         <br />

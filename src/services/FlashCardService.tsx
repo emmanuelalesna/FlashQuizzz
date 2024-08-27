@@ -29,17 +29,28 @@ class FlashCardService {
     });
   }
 
-  patchFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
+  putFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
     if (FlashCard.FlashCardQuestion == "" || FlashCard.FlashCardAnswer == "") {
       throw new Error("Flash card information is incomplete.");
     }
 
-    return axios.patch(url + "/flash-cards/TO-UPDATE", {
+    return axios.put(url + "/flash-cards/TO-UPDATE", {
       body: FlashCard,
       headers: {
         Authorization: localStorage.getItem("access-token"),
       },
     });
+  }
+
+  deleteFlashCard(id : number): Promise<AxiosResponse> {
+    return axios.delete(
+      url + "/flash-cards/TO-UPDATE/" + id,
+      {
+        headers: {
+          Authorization: localStorage.getItem("access-token"),
+        },
+      }
+    );
   }
 }
 export default FlashCardService;
