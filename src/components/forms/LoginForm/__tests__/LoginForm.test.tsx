@@ -1,21 +1,21 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
-import { test, expect, describe } from "@jest/globals";
+import { expect, describe, it } from "@jest/globals";
 import UserService from "../../../../services/UserService";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "../LoginForm";
 
 describe("Login Form", () => {
-  test("login form renders properly", () => {
+  it("renders properly", () => {
     // arrange
-    render(<LoginForm userService={new UserService()}/>);
+    render(<LoginForm userService={new UserService()} />);
 
     // assert
     expect(screen.getByText("Submit")).toBeInTheDocument();
   });
 
-  test("login form submit button calls event handler", async () => {
+  it("calls event handler when the submit button is clicked", async () => {
     // arrange: render component and grab submit button
     const userService = new UserService();
     render(<LoginForm userService={userService} />);

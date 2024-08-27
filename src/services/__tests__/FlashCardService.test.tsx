@@ -71,7 +71,27 @@ describe("Flash Card Service", () => {
   });
 
   describe("put flash card", () => {
-    test("calls axios with correct url", async () => {
+    it("raises an error for incomplete flash card", () => {
+      // arrange: create flashcard
+      const flashCard: IFlashCard = {
+        FlashCard: {
+          FlashCardQuestion: "",
+          FlashCardAnswer: "",
+          FlashCardID: 1,
+          CreatedDate: new Date(Date.now()),
+        },
+      };
+
+      // act: invoke postFlashCard
+      const putFlashCard = () => {
+        new FlashCardService().putFlashCard(flashCard);
+      };
+
+      // assert that error is raised
+      expect(putFlashCard).toThrow("Flash card information is incomplete.");
+    });
+ 
+    it("calls axios with correct url for a complete flash card", async () => {
       const flashCard: IFlashCard = {
         FlashCard: {
           FlashCardQuestion: "Question",
