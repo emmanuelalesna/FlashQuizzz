@@ -26,7 +26,7 @@ describe("Register Form", () => {
 
     // arrange: get mock function for userservice.register
     const serviceSpy = jest.spyOn(userService, "register");
-    // serviceSpy.mockResolvedValue({ status: 0 }  as AxiosResponse);
+    serviceSpy.mockResolvedValue({} as AxiosResponse);
     const submitButtonClick = () => userEvent.click(submitButton);
     // act: click submit button
     // assert that error is thrown

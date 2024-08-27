@@ -6,6 +6,7 @@ import IFlashCard from "../../../../interfaces/IFlashCard";
 import { render, screen } from "@testing-library/react";
 import { test, expect, describe } from "@jest/globals";
 import userEvent from "@testing-library/user-event";
+import { AxiosResponse } from "axios";
 
 describe("Edit Flash Card Form", () => {
   test("edit flash card form renders the flash card details", () => {
@@ -42,25 +43,22 @@ describe("Edit Flash Card Form", () => {
         CreatedDate: new Date(Date.now()),
       },
     };
+    const flashCardService = new FlashCardService();
     render(
       <EditFlashCardForm
-        flashCardService={new FlashCardService()}
+        flashCardService={flashCardService}
         flashCard={flashCard.FlashCard}
       />
     );
     const submitButton = screen.getByText("Submit");
 
     // arrange: get mock function for flashcardservice.putFlashCard
-    const serviceSpy = jest.spyOn(FlashCardService.prototype, "putFlashCard");
-
+    const serviceSpy = jest.spyOn(flashCardService, "putFlashCard");
+    serviceSpy.mockResolvedValue({ status: 200 } as AxiosResponse);
+    const clickButton = () => userEvent.click(submitButton);
     //act: click submit button
-    try {
-      await userEvent.click(submitButton);
-    } catch {
-      // do nothing here but it should throw error
-    } finally {
-      // assert: the spy should have been called
-      expect(serviceSpy).toHaveBeenCalled();
-    }
+    await clickButton();
+    // assert: raises error about incomplete flash card information
+    expect(serviceSpy).toHaveBeenCalled();
   });
 });
