@@ -5,8 +5,9 @@ import { expect, describe, it } from "@jest/globals";
 import UserService from "../../../../services/UserService";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "../LoginForm";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 jest.mock("axios");
+
 describe("Login Form", () => {
   it("renders properly", () => {
     // arrange
@@ -21,9 +22,12 @@ describe("Login Form", () => {
     const userService = new UserService();
     render(<LoginForm userService={userService} />);
     const submitButton = screen.getByText("Submit");
-
+    const mockAxiosResponse = {
+      status: 200,
+      statusText: "OK",
+    };
     const serviceSpy = jest.spyOn(userService, "login");
-
+    serviceSpy.mockResolvedValue(mockAxiosResponse as AxiosResponse);
     // act: click submit button
     const click = () => userEvent.click(submitButton);
     try {

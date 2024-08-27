@@ -5,7 +5,7 @@ import { test, expect, describe } from "@jest/globals";
 import RegisterForm from "../RegisterForm";
 import UserService from "../../../../services/UserService";
 import userEvent from "@testing-library/user-event";
-
+import { AxiosResponse } from "axios";
 describe("Register Form", () => {
   test("register form renders properly", () => {
     // arrange
@@ -26,16 +26,11 @@ describe("Register Form", () => {
 
     // arrange: get mock function for userservice.register
     const serviceSpy = jest.spyOn(userService, "register");
-
+    // serviceSpy.mockResolvedValue({ status: 0 }  as AxiosResponse);
+    const submitButtonClick = () => userEvent.click(submitButton);
     // act: click submit button
-    try {
-      await userEvent.click(submitButton);
-    } catch {
-      // do nothing here but it should throw error
-    } finally {
-      // assert: the spy should have been calld
-      expect(serviceSpy).toHaveBeenCalled();
-    }
+    // assert that error is thrown
+    expect(submitButtonClick).toThrowError("Error submitting user data");
   });
 
   test("Reset button  properly resets all form fields", async () => {

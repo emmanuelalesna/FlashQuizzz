@@ -37,7 +37,7 @@ function LoginForm({ userService }: { userService: UserService }) {
   async function submit() {
     try {
       const response = await userService.login(state);
-      if (response.status) {
+      if (response.status == 200) {
         console.log("Logged In");
       }
     } catch (error) {
