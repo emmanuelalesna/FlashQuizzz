@@ -75,21 +75,24 @@ function EditFlashCardForm(props: {
       <h3>Edit a flash card</h3>
       <form>
         <p>Card ID: {props.flashCard.FlashCardID}</p>
-        <label>Question: </label>
+        <label>Question: 
         <input
           type="text"
           name="question"
           value={state.FlashCardQuestion}
           onChange={handleQuestionChange}
         />
+        </label>
         <br />
-        <label>Answer: </label>
-        <input
-          type="text"
-          name="answer"
-          value={state.FlashCardAnswer}
-          onChange={handleAnswerChange}
-        />
+        <label>
+          Answer:
+          <input
+            type="text"
+            name="answer"
+            value={state.FlashCardAnswer}
+            onChange={handleAnswerChange}
+          />
+        </label>
         <br />
         <button type="button" onClick={handleReset}>
           Reset

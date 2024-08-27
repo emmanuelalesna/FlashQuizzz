@@ -58,7 +58,7 @@ describe("Edit Flash Card Form", () => {
     const clickButton = () => userEvent.click(submitButton);
     //act: click submit button
     await clickButton();
-    // assert: raises error about incomplete flash card information
+    // assert:  calls on the mocked function serviceSpy 
     expect(serviceSpy).toHaveBeenCalled();
   });
 });
