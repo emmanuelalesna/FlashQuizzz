@@ -48,16 +48,20 @@ function LoginForm({ userService }: { userService: UserService }) {
     <div>
       <h3>Log In</h3>
       <div>
-        <label>Email:</label>
-        <input type="text" value={state.email} onChange={handleEmailChange} />
+        <label>
+          Email:
+          <input type="text" value={state.email} onChange={handleEmailChange} />
+        </label>
       </div>
       <div>
-        <label>Password:</label>
-        <input
-          type="text"
-          value={state.password}
-          onChange={handlePasswordChange}
-        />
+        <label>
+          Password:
+          <input
+            type="text"
+            value={state.password}
+            onChange={handlePasswordChange}
+          />
+        </label>
       </div>
       <button onClick={submit}>Submit</button>
       <div>
