@@ -1,3 +1,4 @@
+// Flash card fetcher unit tests
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
@@ -33,6 +34,17 @@ const testCards: IFlashCard["FlashCard"][] = [
 ];
 
 describe("Flash Card Fetcher", () => {
+  it("renders loading message before flash cards retreived", () => {
+    // arrange: render component
+    const flashCardService = new FlashcardService();
+    const serviceSpy = jest.spyOn(flashCardService, "getFlashCards");
+    serviceSpy.mockResolvedValue({ data: [] } as AxiosResponse);
+    render(<FlashCardFetcher flashCardService={flashCardService} />);
+    const message = "Flash cards loading...";
+    // assert
+    expect(screen.getByText(message)).toBeInTheDocument();
+  });
+
   test("renders fetched flash card details", async () => {
     // arrange
     const flashCardService = new FlashcardService();

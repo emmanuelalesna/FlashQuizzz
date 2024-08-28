@@ -53,6 +53,10 @@ function LoginForm({ userService }: { userService: UserService }) {
         }
         // Redirect to home page
         // navigate('/my-cards');
+        setRedirectToDashboard(true);
+      } else {
+        console.log("Login Failed");
+        alert("Email or Password is incorrect.");
       }
     } catch (error) {
       console.error("Error submitting user data", error);
