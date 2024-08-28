@@ -75,6 +75,7 @@ function EditFlashCardForm(props: {
     try {
       const cardToPut: IFlashCard = {
         FlashCard: {
+          UserID: props.flashCard.UserID,
           FlashCardID: props.flashCard.FlashCardID,
           FlashCardQuestion: state.FlashCardQuestion,
           FlashCardAnswer: state.FlashCardAnswer,
@@ -84,7 +85,7 @@ function EditFlashCardForm(props: {
       };
       const response = await props.flashCardService.putFlashCard(cardToPut);
       if (response.status) {
-        console.log("flash card patched");
+        console.log("flash card put");
       }
     } catch (error) {
       console.error("Error submitting flash card: ", error);
@@ -125,7 +126,7 @@ function EditFlashCardForm(props: {
         <button type="button" onClick={handleReset}>
           Reset
         </button>
-        <button type="submit" onClick={handleSubmit}>
+        <button type="button" onClick={handleSubmit}>
           Submit
         </button>
       </form>
