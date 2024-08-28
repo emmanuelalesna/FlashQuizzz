@@ -101,16 +101,16 @@ describe("User Service", () => {
       const finalUrl = url + registerEndpoint;
       // arrange: creat mock axios implementation
 
-      const axiosCallMock = (url: string, data: unknown): Promise<object> =>
+      const mockAxiosCall = (url: string, data: unknown): Promise<object> =>
         Promise.resolve({ data: data, config: { url: url } });
-      const axiosMock = axios.post as jest.MockedFunction<typeof axios.post>;
-      axiosMock.mockImplementation(axiosCallMock);
+      const mAxiosPost = axios.post as jest.MockedFunction<typeof axios.post>;
+      mAxiosPost.mockImplementation(mockAxiosCall);
 
       // act : call register function
       const registerResponse = await userService.register(mockNewUser);
 
       // assert: mock should have been invoked with correct url
-      expect(axiosMock).toHaveBeenCalled();
+      expect(mAxiosPost).toHaveBeenCalled();
       expect(registerResponse.config.url).toEqual(finalUrl);
 
       const returnedObject = registerResponse.data;
@@ -160,20 +160,20 @@ describe("User Service", () => {
 
       const finalUrl = url + loginEndpoint;
 
-      const axiosCallMock = (url: string, data: unknown): Promise<object> =>
+      const mAxiosCall = (url: string, data: unknown): Promise<object> =>
         Promise.resolve({
           data: { ...(data as object), auth: true },
           config: { url: url },
         });
 
-      const axiosMockFn = axios.post as jest.MockedFunction<typeof axios.post>;
-      axiosMockFn.mockImplementation(axiosCallMock);
+      const mAxiosPost = axios.post as jest.MockedFunction<typeof axios.post>;
+      mAxiosPost.mockImplementation(mAxiosCall);
 
       // act: call login
       const loginResponse = await userService.login(mockExistingUser);
 
       // assert that a call was made to the auth route
-      expect(axiosMockFn).toBeCalled();
+      expect(mAxiosPost).toBeCalled();
       expect(loginResponse.config.url).toEqual(finalUrl);
     });
   });
