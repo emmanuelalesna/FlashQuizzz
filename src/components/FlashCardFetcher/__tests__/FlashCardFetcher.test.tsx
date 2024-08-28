@@ -1,11 +1,15 @@
+/**
+ * @jest-environment jsdom
+ */
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { test, expect, describe } from "@jest/globals";
 import FlashCardFetcher from "../FlashCardFetcher";
-import FlashcardService from "../../services/FlashCardService";
-import IFlashCard from "../../interfaces/IFlashCard";
+import FlashcardService from "../../../services/FlashCardService";
+import IFlashCard from "../../../interfaces/IFlashCard";
 import Category from "../../../interfaces/Category";
+import { AxiosResponse } from "axios";
 
 const testCards: IFlashCard["FlashCard"][] = [
   {
@@ -36,7 +40,7 @@ describe("Flash Card Fetcher", () => {
     // arrange
     const flashCardService = new FlashcardService();
     const serviceSpy = jest.spyOn(flashCardService, "getFlashCards");
-    serviceSpy.mockResolvedValue(testCards);
+    serviceSpy.mockResolvedValue({data: testCards} as AxiosResponse);
     render(<FlashCardFetcher flashCardService={flashCardService} />);
 
     testCards.forEach((flashCard) => {
