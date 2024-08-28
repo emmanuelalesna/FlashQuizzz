@@ -49,14 +49,15 @@ function FlashCardFetcher({
     }
     fetchFlashCards();
   }, [flashCardService]);
+  const FlashCardComponents = flashCards.map((item, index) => (
+    <FlashCardComponent key={index} FlashCard={item} />
+  ));
   return (
     <div>
       <h3>Flash cards here:</h3>
       <ul>
         {flashCards.length > 0 ? (
-          flashCards.map((item, index) => (
-            <FlashCardComponent key={index} FlashCard={item} />
-          ))
+          FlashCardComponents
         ) : (
           <p>Flash cards loading...</p>
         )}

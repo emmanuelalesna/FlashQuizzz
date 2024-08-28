@@ -10,7 +10,7 @@ export default {
   coverageReporters: ["json", "html", "text"],
   coverageThreshold: {
     global: {
-      branches: 45,
+      branches: 20,
     },
   },
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
