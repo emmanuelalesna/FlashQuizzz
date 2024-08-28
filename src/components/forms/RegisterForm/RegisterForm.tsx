@@ -151,7 +151,7 @@ function RegisterForm({ userService }: { userService: UserService }) {
           value={state.Password}
           onChange={handlePasswordChange}
           className="form-control"
-          placeholder="Password"
+          placeholder="Enter Password (min. length 3)"
         />
       </div>
       <div className="mb-6">
