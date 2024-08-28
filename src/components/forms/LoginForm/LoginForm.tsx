@@ -2,7 +2,6 @@ import React, { useReducer } from "react";
 import { url } from "../../../url.json";
 import LoginFormState from "../../../interfaces/ILoginFormState";
 import UserService from "../../../services/UserService";
-import { useNavigate } from "react-router-dom";
 
 type ActionType =
   | { type: "setEmail"; payload: string }
@@ -84,36 +83,7 @@ function LoginForm({ userService }: { userService: UserService }) {
       >
         Login
       </button>
-      {/* <div>
-        {state.email}
-        {state.password}
-      </div> */}
     </form>
-
-    // <div>
-    //   <h3>Log In</h3>
-    //   <div>
-    //     <label>
-    //       Email:
-    //       <input type="text" value={state.email} onChange={handleEmailChange} />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Password:
-    //       <input
-    //         type="text"
-    //         value={state.password}
-    //         onChange={handlePasswordChange}
-    //       />
-    //     </label>
-    //   </div>
-    //   <button onClick={submit}>Submit</button>
-    //   <div>
-    //     {state.email}
-    //     {state.password}
-    //   </div>
-    // </div>
   );
 }
 
