@@ -11,8 +11,8 @@ describe("Register Form", () => {
     // arrange
     render(<RegisterForm userService={new UserService()} />);
 
-    const submitButton = screen.getByText("Submit");
-    const resetButton = screen.getByText("Reset Fields");
+    const submitButton = screen.getByText("Signup");
+    const resetButton = screen.getByText("Reset");
 
     expect(submitButton).toBeInTheDocument();
     expect(resetButton).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe("Register Form", () => {
     // arrange: render component
     const userService = new UserService();
     render(<RegisterForm userService={userService} />);
-    const submitButton = screen.getByText("Submit");
+    const submitButton = screen.getByText("Signup");
 
     // arrange: get mock function for userservice.register
     const serviceSpy = jest.spyOn(userService, "register");
@@ -37,7 +37,7 @@ describe("Register Form", () => {
 
   test("Reset button  properly resets all form fields", async () => {
     render(<RegisterForm userService={new UserService()} />);
-    const resetButton = screen.getByText("Reset Fields");
+    const resetButton = screen.getByText("Reset");
     const formFields = screen.getAllByRole("textbox");
     const firstNameField = formFields[0];
     const lastNameField = formFields[1];
@@ -57,7 +57,7 @@ describe("Register Form", () => {
 
     await userEvent.click(resetButton);
 
-    // assert
+    // assert that fields have been reset
 
     expect(firstNameField).toHaveValue("");
     expect(lastNameField).toHaveValue("");
