@@ -20,7 +20,7 @@ describe("Flash Card Component", () => {
     };
 
     render(<FlashCardComponent FlashCard={flashCard.FlashCard} />);
-    screen.debug();
+
     expect(screen.getByText("My Question")).toBeInTheDocument();
     expect(screen.getByText("My Answer")).toBeInTheDocument();
   });

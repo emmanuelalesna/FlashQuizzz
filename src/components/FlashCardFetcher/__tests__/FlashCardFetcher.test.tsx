@@ -32,7 +32,7 @@ const testCards: IFlashCard["FlashCard"][] = [
   },
 ];
 
-describe("Flash Card Fetcher", async () => {
+describe("Flash Card Fetcher", () => {
   test("renders fetched flash card details", async () => {
     // arrange
     const flashCardService = new FlashcardService();
