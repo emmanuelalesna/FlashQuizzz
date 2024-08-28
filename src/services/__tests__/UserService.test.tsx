@@ -116,8 +116,39 @@ describe("User Service", () => {
     });
   });
 
-  xdescribe("login validation", () => {});
+  describe("login validation", () => {
+    test("missing email throws appropriate error", () => {
+      // arrange: create user object
+      const userService = new UserService();
+      const mockUserInfo: LoginFormState = {
+        email: "",
+        password: "password",
+      };
 
+      // act
+      const event = () => {
+        userService.login(mockUserInfo);
+      };
+      //act & assert
+      expect(event).toThrow("Email cannot be empty.");
+    });
+
+    test("missing password throws appropriate error", () => {
+      // arrange: create user object
+      const userService = new UserService();
+      const mockUserInfo: LoginFormState = {
+        email: "paul@revature.net",
+        password: "",
+      };
+
+      // act
+      const event = () => {
+        userService.login(mockUserInfo);
+      };
+      //act & assert
+      expect(event).toThrow("Password cannot be empty.");
+    });
+  });
   describe("login route", () => {
     test("email and password cause a post request to be made", async () => {
       // arrange mocks
