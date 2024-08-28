@@ -1,8 +1,8 @@
 import React, { useReducer, useState } from "react";
-import { url } from "../../../url.json";
+
 import LoginFormState from "../../../interfaces/ILoginFormState";
 import UserService from "../../../services/UserService";
-import { Navigate, useNavigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom"; // TODO: #17 Rework: Navigate cannot be used here in LoginForm.tsx
 
 type ActionType =
   | { type: "setEmail"; payload: string }
@@ -28,7 +28,8 @@ function LoginForm({ userService }: { userService: UserService }) {
     password: "",
   });
 
-  const [redirectToDashboard, setRedirectToDashboard] = useState<boolean>(false);
+  const [redirectToDashboard, setRedirectToDashboard] =
+    useState<boolean>(false);
 
   function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "setEmail", payload: event?.target.value });
@@ -47,11 +48,11 @@ function LoginForm({ userService }: { userService: UserService }) {
         console.log(response.data);
         console.log("Logged In");
         // Store the object in local storage
-        localStorage.setItem('userObject', JSON.stringify(response.data));
-            
+        localStorage.setItem("userObject", JSON.stringify(response.data));
+
         // Redirect to dashboard page
         setRedirectToDashboard(true);
-      }else{
+      } else {
         console.log("Login Failed");
         alert("Email or Password is incorrect.");
       }
@@ -61,9 +62,9 @@ function LoginForm({ userService }: { userService: UserService }) {
     }
   }
 
-  if (redirectToDashboard) {
-    return <Navigate to="/dashboard" />;
-  }
+  // if (redirectToDashboard) {
+  //   return <Navigate to="/dashboard" />;
+  // }
 
   return (
     <form className="mb-6">
@@ -88,7 +89,13 @@ function LoginForm({ userService }: { userService: UserService }) {
           placeholder="Password"
         />
       </div>
-      <button type="button" onClick={submit} className="btn btn-primary btn-block w-100">Login</button>
+      <button
+        type="button"
+        onClick={submit}
+        className="btn btn-primary btn-block w-100"
+      >
+        Login
+      </button>
       {/* <div>
         {state.email}
         {state.password}
