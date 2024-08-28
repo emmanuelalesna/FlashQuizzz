@@ -116,7 +116,9 @@ describe("Flash Card Service", () => {
 
       //assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
-      expect(calledURL).toEqual(url + flashCardEndpoint);
+      expect(calledURL).toEqual(
+        url + flashCardEndpoint + "/" + flashCard.FlashCard.FlashCardID
+      );
     });
   });
 
@@ -124,7 +126,7 @@ describe("Flash Card Service", () => {
     it("calls axios with correct url for a complete flash card", async () => {
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: 1,
+          UserID: "1",
           FlashCardQuestion: "Question",
           FlashCardAnswer: "Answer",
           FlashCardID: 1,
