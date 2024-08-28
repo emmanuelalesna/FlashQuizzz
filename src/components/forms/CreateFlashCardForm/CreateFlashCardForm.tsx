@@ -63,14 +63,14 @@ function CreateFlashCardForm({
 
   async function handleSubmit() {
     try {
-      //TODO: CHANGE WHEN LOCAL STORAGE IMPLEMENTED
-      const userInfo = localStorage.getItem("userInfo");
-      if (userInfo == null) {
+      const userID = localStorage.getItem("userID");
+      if (userID == null) {
         throw new Error("User information is missing.");
       }
+
       const cardToPost: IFlashCard = {
         FlashCard: {
-          UserID: JSON.parse(userInfo).ID,
+          UserID: userID,
           FlashCardQuestion: state.FlashCardQuestion,
           FlashCardAnswer: state.FlashCardAnswer,
           FlashCardCategory: state.FlashCardCategory,
@@ -90,7 +90,7 @@ function CreateFlashCardForm({
   return (
     <div>
       <h3>Add a flash card</h3>
-      <form>
+      <form data-testid="create-flash-card-form">
         <label>
           Question:
           <input
@@ -115,7 +115,9 @@ function CreateFlashCardForm({
           />
         </label>
         <button onClick={handleReset}>Reset Fields</button>
-        <button onClick={handleSubmit}>Submit</button>
+        <button type="button" onClick={handleSubmit}>
+          Submit
+        </button>
       </form>
     </div>
   );

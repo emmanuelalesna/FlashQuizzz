@@ -22,6 +22,11 @@ type ActionType =
   | {
       type: "reset";
     };
+interface IEditFlashCardState {
+  FlashCardQuestion: string;
+  FlashCardAnswer: string;
+  FlashCardCategory: number;
+}
 
 function formReducer(
   state: ICreateFlashCardFormState,
@@ -36,24 +41,24 @@ function formReducer(
       return { ...state, FlashCardCategory: action.payload };
     case "reset":
       return {
-        FlashCardQuestion: "",
-        FlashCardAnswer: "",
-        FlashCardCategory: Category.None,
+        ...defaultFlashCardState,
       };
     default:
       throw new Error("Unknown action type");
   }
 }
 
+/**
+ * A React component for editing a flash card.
+ * @param {IFlashCard["FlashCard"]} props.flashCard - The flash card to edit.
+ * @param {FlashCardService} props.flashCardService - The service for interacting with flash cards.
+ * @return {JSX.Element} The rendered component.
+ */
 function EditFlashCardForm(props: {
   flashCard: IFlashCard["FlashCard"];
   flashCardService: FlashCardService;
 }) {
-  const [state, dispatch] = useReducer(formReducer, {
-    FlashCardQuestion: "",
-    FlashCardAnswer: "",
-    FlashCardCategory: Category.None,
-  });
+  const [state, dispatch] = useReducer(formReducer, defaultFlashCardState);
 
   function handleQuestionChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "editQuestion", payload: event?.target.value });
@@ -75,6 +80,7 @@ function EditFlashCardForm(props: {
     try {
       const cardToPut: IFlashCard = {
         FlashCard: {
+          UserID: props.flashCard.UserID,
           FlashCardID: props.flashCard.FlashCardID,
           FlashCardQuestion: state.FlashCardQuestion,
           FlashCardAnswer: state.FlashCardAnswer,
@@ -84,7 +90,7 @@ function EditFlashCardForm(props: {
       };
       const response = await props.flashCardService.putFlashCard(cardToPut);
       if (response.status) {
-        console.log("flash card patched");
+        console.log("flash card put");
       }
     } catch (error) {
       console.error("Error submitting flash card: ", error);
@@ -125,12 +131,18 @@ function EditFlashCardForm(props: {
         <button type="button" onClick={handleReset}>
           Reset
         </button>
-        <button type="submit" onClick={handleSubmit}>
+        <button type="button" onClick={handleSubmit}>
           Submit
         </button>
       </form>
     </div>
   );
 }
+
+const defaultFlashCardState: IEditFlashCardState = {
+  FlashCardQuestion: "",
+  FlashCardAnswer: "",
+  FlashCardCategory: Category.None,
+};
 
 export default EditFlashCardForm;
