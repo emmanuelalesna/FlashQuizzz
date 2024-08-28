@@ -1,16 +1,20 @@
+/**
+ * @jest-environment jsdom
+ */
 import "@testing-library/jest-dom";
-import React from "react";
-import EditFlashCardForm from "../EditFlashCardForm";
-import FlashCardService from "../../../../services/FlashCardService";
-import IFlashCard from "../../../../interfaces/IFlashCard";
+import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { test, expect, describe } from "@jest/globals";
+import FlashCardDeleter from "../FlashCardDeleter";
+import FlashcardService from "../../../services/FlashCardService";
+import IFlashCard from "../../../interfaces/IFlashCard";
 import userEvent from "@testing-library/user-event";
 import { AxiosResponse } from "axios";
 
-describe("Edit Flash Card Form", () => {
-  test("edit flash card form renders the flash card details", () => {
+describe("Flash Card Deleter", () => {
+  it("renders properly", () => {
     // arrange
+    const flashCardService = new FlashcardService();
     const flashCard: IFlashCard = {
       FlashCard: {
         FlashCardID: 1,
@@ -20,22 +24,22 @@ describe("Edit Flash Card Form", () => {
         FlashCardCategory: 1,
       },
     };
-    const flashCardService = new FlashCardService();
+    // act: render the component
     render(
-      <EditFlashCardForm
+      <FlashCardDeleter
         flashCardService={flashCardService}
         flashCard={flashCard.FlashCard}
       />
     );
+    const message = `Are you sure you want to delete flashcard ${flashCard.FlashCard.FlashCardID}?`;
 
-    jest.spyOn(flashCardService, "putFlashCard");
-
-    expect(screen.getByPlaceholderText("Question")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Answer")).toBeInTheDocument();
+    // assert that the message is rendered
+    expect(screen.getByText(message)).toBeInTheDocument();
   });
 
-  test("submit button calls event handler", async () => {
-    // arrange: render component
+  test("delete button calls event handler", async () => {
+    // arrange: render component and get delete button
+    const flashCardService = new FlashcardService();
     const flashCard: IFlashCard = {
       FlashCard: {
         FlashCardID: 1,
@@ -45,21 +49,21 @@ describe("Edit Flash Card Form", () => {
         FlashCardCategory: 1,
       },
     };
-    const flashCardService = new FlashCardService();
     render(
-      <EditFlashCardForm
+      <FlashCardDeleter
         flashCardService={flashCardService}
         flashCard={flashCard.FlashCard}
       />
     );
-    const submitButton = screen.getByText("Submit");
 
-    // arrange: get mock function for flashcardservice.putFlashCard
-    const serviceSpy = jest.spyOn(flashCardService, "putFlashCard");
+    // arrange: get mock function for flashcardservice.deleteFlashCard
+    const serviceSpy = jest.spyOn(flashCardService, "deleteFlashCard");
     serviceSpy.mockResolvedValue({ status: 200 } as AxiosResponse);
-    const clickButton = () => userEvent.click(submitButton);
-    //act: click submit button
-    await clickButton();
+
+    const deleteButton = screen.getByText("Confirm");
+
+    // act: click delete button
+    await userEvent.click(deleteButton);
     // assert:  calls on the mocked function serviceSpy
     expect(serviceSpy).toHaveBeenCalled();
   });

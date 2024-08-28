@@ -1,8 +1,8 @@
-import React, { useReducer } from "react";
-import { url } from "../../../url.json";
+import React, { useReducer, useState } from "react";
+
 import LoginFormState from "../../../interfaces/ILoginFormState";
 import UserService from "../../../services/UserService";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 type ActionType =
   | { type: "setEmail"; payload: string }
@@ -28,6 +28,9 @@ function LoginForm({ userService }: { userService: UserService }) {
     password: "",
   });
 
+  const [redirectToDashboard, setRedirectToDashboard] =
+    useState<boolean>(false);
+
   function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "setEmail", payload: event?.target.value });
   }
@@ -37,8 +40,7 @@ function LoginForm({ userService }: { userService: UserService }) {
 
   async function submit() {
     try {
-      // const navigate = useNavigate();
-      // console.log("In Submit function");
+      console.log("In Submit function");
       const response = await userService.login(state);
       // console.log(response);
       if (response.status == 200) {
@@ -52,18 +54,36 @@ function LoginForm({ userService }: { userService: UserService }) {
       }
     } catch (error) {
       console.error("Error submitting user data", error);
+      alert("Email or Password is incorrect.");
     }
   }
+
+  if (redirectToDashboard) {
+    return <Navigate to="/dashboard" />;
+  }
+
   return (
     <form className="mb-6">
       <h4>&nbsp;</h4>
       <div className="mb-3">
         <label className="form-label">Email address</label>
-        <input type="email" value={state.email} onChange={handleEmailChange} className="form-control" placeholder="Enter email" />
+        <input
+          type="email"
+          value={state.email}
+          onChange={handleEmailChange}
+          className="form-control"
+          placeholder="Enter email"
+        />
       </div>
       <div className="mb-3">
         <label className="form-label">Password</label>
-        <input type="password" value={state.password} onChange={handlePasswordChange} className="form-control" placeholder="Password" />
+        <input
+          type="password"
+          value={state.password}
+          onChange={handlePasswordChange}
+          className="form-control"
+          placeholder="Password"
+        />
       </div>
       <button type="button" onClick={submit} className="btn btn-primary btn-block w-100">Login</button>
       {/* <div>
@@ -71,31 +91,6 @@ function LoginForm({ userService }: { userService: UserService }) {
         {state.password}
       </div> */}
     </form>
-
-    // <div>
-    //   <h3>Log In</h3>
-    //   <div>
-    //     <label>
-    //       Email:
-    //       <input type="text" value={state.email} onChange={handleEmailChange} />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Password:
-    //       <input
-    //         type="text"
-    //         value={state.password}
-    //         onChange={handlePasswordChange}
-    //       />
-    //     </label>
-    //   </div>
-    //   <button onClick={submit}>Submit</button>
-    //   <div>
-    //     {state.email}
-    //     {state.password}
-    //   </div>
-    // </div>
   );
 }
 
