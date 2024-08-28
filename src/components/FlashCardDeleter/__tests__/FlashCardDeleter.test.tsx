@@ -63,7 +63,7 @@ describe("Flash Card Deleter", () => {
     const deleteButton = screen.getByText("Confirm");
 
     // act: click delete button
-    userEvent.click(deleteButton);
+    await userEvent.click(deleteButton);
     // assert:  calls on the mocked function serviceSpy
     expect(serviceSpy).toHaveBeenCalled();
   });

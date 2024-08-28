@@ -14,7 +14,7 @@ describe("Login Form", () => {
     render(<LoginForm userService={new UserService()} />);
 
     // assert
-    expect(screen.getByText("Email")).toBeInTheDocument();
+    expect(screen.getByText("Email address")).toBeInTheDocument();
     expect(screen.getByText("Password")).toBeInTheDocument();
     expect(screen.getByText("Login")).toBeInTheDocument();
   });

@@ -30,8 +30,8 @@ describe("Edit Flash Card Form", () => {
 
     jest.spyOn(flashCardService, "putFlashCard");
 
-    expect(screen.getByText("Question")).toBeInTheDocument();
-    expect(screen.getByText("Answer")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Question")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Answer")).toBeInTheDocument();
   });
 
   test("submit button calls event handler", async () => {
