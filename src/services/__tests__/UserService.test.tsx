@@ -6,24 +6,37 @@ import { url, registerEndpoint, loginEndpoint } from "../../url.json";
 import { test, expect } from "@jest/globals";
 jest.mock("axios");
 
-interface mockNewUser extends RegisterFormState {
+interface IMockNewUser extends RegisterFormState {
   [index: string]: string;
 }
 
-interface mockExistingUser extends LoginFormState {
+interface IMockExistingUser extends LoginFormState {
   [index: string]: string;
 }
+// instantiate user service once here to be used in all tests
+const userService = new UserService();
+
+// create mock user templates
+const mockNewUser: IMockNewUser = {
+  FirstName: "Paul",
+  LastName: "Glenn",
+  Email: "paul@revature.net",
+  Password: "password",
+};
+
+const mockExistingUser: IMockExistingUser = {
+  email: "paul@revature.net",
+  password: "password",
+};
 
 describe("User Service", () => {
   describe("registration validation", () => {
     test("missing first name throws error", () => {
       // arrange: create user object
-      const userService = new UserService();
-      const mockUserInfo: RegisterFormState = {
+
+      const mockUserInfo: IMockNewUser = {
+        ...mockNewUser,
         FirstName: "",
-        LastName: "",
-        Email: "",
-        Password: "",
       };
 
       // act
@@ -35,12 +48,10 @@ describe("User Service", () => {
     });
     test("missing last name throws appropriate error", () => {
       // arrange: create user object
-      const userService = new UserService();
-      const mockUserInfo: RegisterFormState = {
-        FirstName: "Paul",
+
+      const mockUserInfo: IMockNewUser = {
+        ...mockNewUser,
         LastName: "",
-        Email: "",
-        Password: "",
       };
 
       // act
@@ -50,14 +61,13 @@ describe("User Service", () => {
       //act & assert
       expect(event).toThrow("Last name cannot be empty.");
     });
+
     test("missing email throws appropriate error", () => {
       // arrange: create user object
-      const userService = new UserService();
-      const mockUserInfo: RegisterFormState = {
-        FirstName: "Paul",
-        LastName: "Glenn",
+
+      const mockUserInfo: IMockNewUser = {
+        ...mockNewUser,
         Email: "",
-        Password: "",
       };
 
       // act
@@ -69,11 +79,9 @@ describe("User Service", () => {
     });
     test("missing password throws appropriate error", () => {
       // arrange: create user object
-      const userService = new UserService();
-      const mockUserInfo: RegisterFormState = {
-        FirstName: "Paul",
-        LastName: "Glenn",
-        Email: "paul@revature.net",
+
+      const mockUserInfo: IMockNewUser = {
+        ...mockNewUser,
         Password: "",
       };
 
@@ -89,29 +97,24 @@ describe("User Service", () => {
   describe("registration route", () => {
     test("a complete user object causes a post request ot be made ", async () => {
       // arrange: create user object
-      const mockUserInfo: mockNewUser = {
-        FirstName: "John",
-        LastName: "Smith",
-        Email: "johnsmith@revature.net",
-        Password: "Password",
-      };
+
       const finalUrl = url + registerEndpoint;
       // arrange: creat mock axios implementation
-      const userService = new UserService();
+
       const axiosCallMock = (url: string, data: unknown): Promise<object> =>
         Promise.resolve({ data: data, config: { url: url } });
       const axiosMock = axios.post as jest.MockedFunction<typeof axios.post>;
       axiosMock.mockImplementation(axiosCallMock);
 
       // act : call register function
-      const response = userService.register(mockUserInfo);
+      const response = userService.register(mockNewUser);
 
       // assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
       expect((await response).config.url).toEqual(finalUrl);
       const returnedObject = (await response).data;
       for (const prop in returnedObject) {
-        expect(returnedObject[prop]).toEqual(mockUserInfo[prop]);
+        expect(returnedObject[prop]).toEqual(mockNewUser[prop]);
       }
     });
   });
@@ -120,24 +123,24 @@ describe("User Service", () => {
     test("missing email throws appropriate error", () => {
       // arrange: create user object
       const userService = new UserService();
-      const mockUserInfo: LoginFormState = {
+      const mockUserInfo: IMockExistingUser = {
+        ...mockExistingUser,
         email: "",
-        password: "password",
       };
 
       // act
-      const event = () => {
+      const loginAttempt = () => {
         userService.login(mockUserInfo);
       };
       //act & assert
-      expect(event).toThrow("Email cannot be empty.");
+      expect(loginAttempt).toThrow("Email cannot be empty.");
     });
 
     test("missing password throws appropriate error", () => {
       // arrange: create user object
       const userService = new UserService();
-      const mockUserInfo: LoginFormState = {
-        email: "paul@revature.net",
+      const mockUserInfo: IMockExistingUser = {
+        ...mockExistingUser,
         password: "",
       };
 
@@ -153,10 +156,6 @@ describe("User Service", () => {
     test("email and password cause a post request to be made", async () => {
       // arrange mocks
       const userService = new UserService();
-      const mockUserInfo: mockExistingUser = {
-        email: "fakeuser@revature.net",
-        password: "password",
-      };
 
       const finalUrl = url + loginEndpoint;
 
@@ -170,7 +169,7 @@ describe("User Service", () => {
       axiosMockFn.mockImplementation(axiosCallMock);
 
       // act: call login
-      const response = await userService.login(mockUserInfo);
+      const response = await userService.login(mockExistingUser);
 
       // assert that a call was made to the auth route
       expect(axiosMockFn).toBeCalled();
