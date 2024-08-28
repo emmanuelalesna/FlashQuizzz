@@ -36,6 +36,18 @@ class UserService {
       password: userInfo.password,
     });
   }
+
+  getUserInfo(accessToken: string): Promise<AxiosResponse> {
+    return axios.post(
+      url + "/api/user/userinfo",
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
+  }
 }
 
 export default UserService;

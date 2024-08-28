@@ -49,7 +49,6 @@ function FlashCardComponent({ FlashCard }: IFlashCard): JSX.Element {
         <p>{FlashCard.FlashCardID}</p>
         <p>{FlashCard.FlashCardQuestion}</p>
         <p>{FlashCard.FlashCardAnswer}</p>
-        <p>{FlashCard.UserID}</p>
         <p>{getCategoryByValue(FlashCard.FlashCardCategory)}</p>
         <p>{FlashCard.CreatedDate.toString()}</p>
 

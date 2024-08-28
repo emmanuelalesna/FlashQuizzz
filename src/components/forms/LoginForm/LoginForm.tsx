@@ -40,15 +40,17 @@ function LoginForm({ userService }: { userService: UserService }) {
 
   async function submit() {
     try {
-      //console.log("In Submit function");
-      const response = await userService.login(state);
-      //console.log(response);
-      if (response.status == 200) {
-        // console.log(response.data);
-        // console.log("Logged In");
+      console.log("In Submit function");
+      const loginResponse = await userService.login(state);
+      if (loginResponse.status == 200) {
+        console.log("Logged In");
         // Store the object in local storage
-        localStorage.setItem("userObject", JSON.stringify(response.data));
-
+        localStorage.setItem("userObject", JSON.stringify(loginResponse.data));
+        const getUserInfoResponse = await userService.getUserInfo(loginResponse.data.accessToken);
+        if (getUserInfoResponse.status == 200) {
+          console.log("User Info Retrieved");
+          localStorage.setItem("userID", loginResponse.data.userID);
+        }
         // Redirect to home page
         // navigate('/my-cards');
         setRedirectToDashboard(true);
