@@ -34,48 +34,48 @@ describe("User Service", () => {
     test("missing first name throws error", () => {
       // arrange: create user object
 
-      const mockUserInfo: IMockNewUser = {
+      const missingFirstNameUserInfo: IMockNewUser = {
         ...mockNewUser,
         FirstName: "",
       };
 
       // act
-      const event = () => {
-        userService.register(mockUserInfo);
+      const registerAttempt = () => {
+        userService.register(missingFirstNameUserInfo);
       };
       //act & assert
-      expect(event).toThrow("First name cannot be empty.");
+      expect(registerAttempt).toThrow("First name cannot be empty.");
     });
     test("missing last name throws appropriate error", () => {
       // arrange: create user object
 
-      const mockUserInfo: IMockNewUser = {
+      const missingLastNameInfo: IMockNewUser = {
         ...mockNewUser,
         LastName: "",
       };
 
       // act
-      const event = () => {
-        userService.register(mockUserInfo);
+      const registerAttempt = () => {
+        userService.register(missingLastNameInfo);
       };
       //act & assert
-      expect(event).toThrow("Last name cannot be empty.");
+      expect(registerAttempt).toThrow("Last name cannot be empty.");
     });
 
     test("missing email throws appropriate error", () => {
       // arrange: create user object
 
-      const mockUserInfo: IMockNewUser = {
+      const missingEmailUserInfo: IMockNewUser = {
         ...mockNewUser,
         Email: "",
       };
 
       // act
-      const event = () => {
-        userService.register(mockUserInfo);
+      const registerAttempt = () => {
+        userService.register(missingEmailUserInfo);
       };
       //act & assert
-      expect(event).toThrow("Email cannot be empty.");
+      expect(registerAttempt).toThrow("Email cannot be empty.");
     });
     test("missing password throws appropriate error", () => {
       // arrange: create user object
@@ -86,11 +86,11 @@ describe("User Service", () => {
       };
 
       // act
-      const event = () => {
+      const registerAttempt = () => {
         userService.register(mockUserInfo);
       };
       //act & assert
-      expect(event).toThrow("Password cannot be empty.");
+      expect(registerAttempt).toThrow("Password cannot be empty.");
     });
   });
 
@@ -107,12 +107,13 @@ describe("User Service", () => {
       axiosMock.mockImplementation(axiosCallMock);
 
       // act : call register function
-      const response = userService.register(mockNewUser);
+      const registerResponse = await userService.register(mockNewUser);
 
       // assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
-      expect((await response).config.url).toEqual(finalUrl);
-      const returnedObject = (await response).data;
+      expect(registerResponse.config.url).toEqual(finalUrl);
+
+      const returnedObject = registerResponse.data;
       for (const prop in returnedObject) {
         expect(returnedObject[prop]).toEqual(mockNewUser[prop]);
       }
@@ -122,7 +123,7 @@ describe("User Service", () => {
   describe("login validation", () => {
     test("missing email throws appropriate error", () => {
       // arrange: create user object
-      const userService = new UserService();
+
       const mockUserInfo: IMockExistingUser = {
         ...mockExistingUser,
         email: "",
@@ -138,24 +139,24 @@ describe("User Service", () => {
 
     test("missing password throws appropriate error", () => {
       // arrange: create user object
-      const userService = new UserService();
+
       const mockUserInfo: IMockExistingUser = {
         ...mockExistingUser,
         password: "",
       };
 
       // act
-      const event = () => {
+      const loginAttempt = () => {
         userService.login(mockUserInfo);
       };
       //act & assert
-      expect(event).toThrow("Password cannot be empty.");
+      expect(loginAttempt).toThrow("Password cannot be empty.");
     });
   });
+
   describe("login route", () => {
     test("email and password cause a post request to be made", async () => {
       // arrange mocks
-      const userService = new UserService();
 
       const finalUrl = url + loginEndpoint;
 
@@ -169,11 +170,11 @@ describe("User Service", () => {
       axiosMockFn.mockImplementation(axiosCallMock);
 
       // act: call login
-      const response = await userService.login(mockExistingUser);
+      const loginResponse = await userService.login(mockExistingUser);
 
       // assert that a call was made to the auth route
       expect(axiosMockFn).toBeCalled();
-      expect(response.config.url).toEqual(finalUrl);
+      expect(loginResponse.config.url).toEqual(finalUrl);
     });
   });
 });
