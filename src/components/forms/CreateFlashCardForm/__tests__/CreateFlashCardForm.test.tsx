@@ -44,7 +44,7 @@ describe("Create Flash Card Form", () => {
       options[mFlashCard.FlashCard.FlashCardCategory].label
     );
     //console.log(selectInput.innerHTML);
-    screen.debug();
+
     expect(questionInput).toHaveValue(mFlashCard.FlashCard.FlashCardQuestion);
     expect(answerInput).toHaveValue(mFlashCard.FlashCard.FlashCardAnswer);
     expect(
@@ -68,7 +68,7 @@ describe("Create Flash Card Form", () => {
       },
     };
 
-    localStorage.setItem("userInfo", JSON.stringify({ userID: 1 }));
+    localStorage.setItem("userID", "1");
 
     // act: type in question, answer, and select category
     const questionInput = screen.getByLabelText("Question:");

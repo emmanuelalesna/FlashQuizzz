@@ -116,7 +116,9 @@ describe("Flash Card Service", () => {
 
       //assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
-      expect(calledURL).toEqual(url + flashCardEndpoint);
+      expect(calledURL).toEqual(
+        url + flashCardEndpoint + "/" + flashCard.FlashCard.FlashCardID
+      );
     });
   });
 
