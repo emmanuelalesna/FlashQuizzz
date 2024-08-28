@@ -50,7 +50,7 @@ describe("Flash Card Service", () => {
     test("calls axios with correct url", async () => {
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: 1,
+          UserID: "1",
           FlashCardQuestion: "Question",
           FlashCardAnswer: "Answer",
           FlashCardID: 1,
@@ -78,7 +78,7 @@ describe("Flash Card Service", () => {
       // arrange: create flashcard
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: 1,
+          UserID: "1",
           FlashCardQuestion: "",
           FlashCardAnswer: "",
           FlashCardID: 1,
@@ -99,7 +99,7 @@ describe("Flash Card Service", () => {
     it("calls axios with correct url for a complete flash card", async () => {
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: 1,
+          UserID: "1",
           FlashCardQuestion: "Question",
           FlashCardAnswer: "Answer",
           FlashCardID: 1,
