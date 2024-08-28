@@ -17,7 +17,7 @@ class UserService {
     if (userInfo.Password.length == 0) {
       throw new Error("Password cannot be empty.");
     }
-    return axios.post(url + "/user/register", {
+    return axios.post(url + "/api/user/register", {
       FirstName: userInfo.FirstName,
       LastName: userInfo.LastName,
       Email: userInfo.Email,

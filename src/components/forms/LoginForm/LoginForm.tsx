@@ -1,8 +1,8 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { url } from "../../../url.json";
 import LoginFormState from "../../../interfaces/ILoginFormState";
 import UserService from "../../../services/UserService";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 type ActionType =
   | { type: "setEmail"; payload: string }
@@ -28,6 +28,8 @@ function LoginForm({ userService }: { userService: UserService }) {
     password: "",
   });
 
+  const [redirectToDashboard, setRedirectToDashboard] = useState<boolean>(false);
+
   function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "setEmail", payload: event?.target.value });
   }
@@ -37,7 +39,7 @@ function LoginForm({ userService }: { userService: UserService }) {
 
   async function submit() {
     try {
-      const navigate = useNavigate();
+      // const navigate = useNavigate();
       console.log("In Submit function");
       const response = await userService.login(state);
       console.log(response);
@@ -45,15 +47,24 @@ function LoginForm({ userService }: { userService: UserService }) {
         console.log(response.data);
         console.log("Logged In");
         // Store the object in local storage
-        localStorage.setItem('userObject', response.data);
+        localStorage.setItem('userObject', JSON.stringify(response.data));
             
-        // Redirect to home page
-        // navigate('/my-cards');
+        // Redirect to dashboard page
+        setRedirectToDashboard(true);
+      }else{
+        console.log("Login Failed");
+        alert("Email or Password is incorrect.");
       }
     } catch (error) {
       console.error("Error submitting user data", error);
+      alert("Email or Password is incorrect.");
     }
   }
+
+  if (redirectToDashboard) {
+    return <Navigate to="/dashboard" />;
+  }
+
   return (
     <form className="mb-6">
       <h4>&nbsp;</h4>
@@ -65,7 +76,7 @@ function LoginForm({ userService }: { userService: UserService }) {
         <label className="form-label">Password</label>
         <input type="password" value={state.password} onChange={handlePasswordChange} className="form-control" placeholder="Password" />
       </div>
-      <button type="submit" onClick={submit} className="btn btn-primary btn-block w-100">Login</button>
+      <button type="button" onClick={submit} className="btn btn-primary btn-block w-100">Login</button>
       {/* <div>
         {state.email}
         {state.password}
