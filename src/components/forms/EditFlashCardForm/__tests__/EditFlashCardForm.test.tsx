@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import React from "react";
+import * as React from "react";
 import EditFlashCardForm from "../EditFlashCardForm";
 import FlashCardService from "../../../../services/FlashCardService";
 import IFlashCard from "../../../../interfaces/IFlashCard";
@@ -62,5 +62,35 @@ describe("Edit Flash Card Form", () => {
     await clickButton();
     // assert:  calls on the mocked function serviceSpy
     expect(serviceSpy).toHaveBeenCalled();
+  });
+
+  test("reset button calls event handler", async () => {
+    // arrange: render component
+    const flashCard: IFlashCard = {
+      FlashCard: {
+        FlashCardID: 1,
+        FlashCardQuestion: "Question",
+        FlashCardAnswer: "Answer",
+        CreatedDate: new Date(Date.now()),
+        FlashCardCategory: 1,
+      },
+    };
+
+    render(
+      <EditFlashCardForm
+        flashCardService={new FlashCardService()}
+        flashCard={flashCard.FlashCard}
+      />
+    );
+    const resetButton = screen.getByText("Reset");
+    const clickButton = () => userEvent.click(resetButton);
+    //act: click reset button
+    await clickButton();
+
+    // assert: fields are now blank for question, answer, and category is none
+    screen.debug();
+    expect(screen.getByPlaceholderText("Question")).toHaveValue("");
+    expect(screen.getByPlaceholderText("Answer")).toHaveValue("");
+    expect(screen.getByText("None")).toBeInTheDocument();
   });
 });

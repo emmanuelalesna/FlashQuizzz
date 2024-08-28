@@ -8,7 +8,7 @@ import userEvent from "@testing-library/user-event";
 import { AxiosResponse } from "axios";
 import MockRouter from "../../../../mocks/MockRouter";
 describe("Register Form", () => {
-  test("register form renders properly", () => {
+  test("register form renders all fields", () => {
     // arrange
     render(MockRouter(<RegisterForm userService={new UserService()} />));
 

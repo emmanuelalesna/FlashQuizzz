@@ -1,7 +1,6 @@
+import "@testing-library/jest-dom"
 import * as React from "react";
 import FlashCardComponent from "../FlashCardComponent";
-import "@testing-library/jest-dom";
-
 import { render, screen } from "@testing-library/react";
 import { it, expect, describe } from "@jest/globals";
 import IFlashCard from "../../../interfaces/IFlashCard";
