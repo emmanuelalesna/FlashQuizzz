@@ -89,7 +89,7 @@ describe("Edit Flash Card Form", () => {
     await clickButton();
 
     // assert: fields are now blank for question, answer, and category is none
-    screen.debug();
+
     expect(screen.getByPlaceholderText("Question")).toHaveValue("");
     expect(screen.getByPlaceholderText("Answer")).toHaveValue("");
   });

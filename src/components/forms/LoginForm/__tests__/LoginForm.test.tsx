@@ -27,6 +27,9 @@ describe("Login Form", () => {
     const mockAxiosResponse = {
       status: 200,
       statusText: "OK",
+      data: {
+        accessToken: "someToken",
+      },
     };
     const serviceSpy = jest.spyOn(userService, "login");
     serviceSpy.mockResolvedValue(mockAxiosResponse as AxiosResponse);

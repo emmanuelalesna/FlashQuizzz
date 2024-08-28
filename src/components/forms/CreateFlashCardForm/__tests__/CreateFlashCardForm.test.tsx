@@ -52,7 +52,7 @@ describe("Create Flash Card Form", () => {
     ).toBeInTheDocument();
   });
 
-  it("calls service when a complete flash card is entered", async () => {
+  it("calls service when a complete flash card is entered and userID is present", async () => {
     // arrange
     const flashCardService = new FlashCardService();
     const serviceSpy = jest.spyOn(flashCardService, "postFlashCard");
@@ -68,7 +68,7 @@ describe("Create Flash Card Form", () => {
       },
     };
 
-    localStorage.setItem("userInfo", JSON.stringify({ ID: 1 }));
+    localStorage.setItem("userInfo", JSON.stringify({ userID: 1 }));
 
     // act: type in question, answer, and select category
     const questionInput = screen.getByLabelText("Question:");
