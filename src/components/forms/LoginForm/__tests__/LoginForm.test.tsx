@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import { expect, describe, it } from "@jest/globals";
 import UserService from "../../../../services/UserService";
@@ -11,7 +12,17 @@ jest.mock("axios");
 describe("Login Form", () => {
   it("renders properly", () => {
     // arrange
-    render(<LoginForm userService={new UserService()} />);
+
+    render(
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<LoginForm userService={new UserService()} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    );
 
     // assert
     expect(screen.getByText("Email address")).toBeInTheDocument();
@@ -28,7 +39,13 @@ describe("Login Form", () => {
     };
     const serviceSpy = jest.spyOn(userService, "login");
     serviceSpy.mockResolvedValue(mockAxiosResponse as AxiosResponse);
-    render(<LoginForm userService={userService} />);
+    render(
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoginForm userService={userService} />} />
+        </Routes>
+      </BrowserRouter>
+    );
     const loginButton = screen.getByText("Login");
     // act: click submit button
     const click = () => userEvent.click(loginButton);

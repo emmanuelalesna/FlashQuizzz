@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import RegisterFormState from "../../../interfaces/IRegisterFormState";
 import UserService from "../../../services/UserService";
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 type ActionType =
   | { type: "setFirstName"; payload: string }
@@ -48,17 +48,18 @@ function RegisterForm({ userService }: { userService: UserService }) {
   // Validate email format and only update state if necessary
   const emailIsValid = emailRegex.test(state.Email);
   if (isEmailValid !== emailIsValid) {
-      setIsEmailValid(emailIsValid);
+    setIsEmailValid(emailIsValid);
   }
 
   useEffect(() => {
     // Check if all fields are filled and meet criteria
-    const isFormValid = state.FirstName !== '' &&
-                        state.LastName !== '' &&
-                        state.Email !== '' &&
-                        emailIsValid &&
-                        state.Password !== '' &&
-                        state.Password.length >= 3;
+    const isFormValid =
+      state.FirstName !== "" &&
+      state.LastName !== "" &&
+      state.Email !== "" &&
+      emailIsValid &&
+      state.Password !== "" &&
+      state.Password.length >= 3;
 
     if (isButtonDisabled === isFormValid) {
       setIsButtonDisabled(!isFormValid);
@@ -82,17 +83,18 @@ function RegisterForm({ userService }: { userService: UserService }) {
   }
 
   async function handleFormSubmit() {
+    console.log("calling handleFormSubmit");
     try {
       const response = await userService.register(state);
       console.log(response);
-      if (response.status==200) {
+      if (response.status == 200) {
         console.log("registered");
         alert(response.data);
         handleReset();
 
         // Redirect to login page
         setRedirectToLogin(true);
-      }else{
+      } else {
         console.log("Registration Failed");
         alert("Registration Failed. Please try again.");
         handleReset();
@@ -111,68 +113,65 @@ function RegisterForm({ userService }: { userService: UserService }) {
       <h4>&nbsp;</h4>
       <div className="mb-3">
         <label className="form-label">First Name</label>
-        <input type="text" value={state.FirstName} onChange={handleFirstNameChange} className="form-control" placeholder="Enter first name" />
+        <input
+          type="text"
+          value={state.FirstName}
+          onChange={handleFirstNameChange}
+          className="form-control"
+          placeholder="Enter first name"
+        />
       </div>
       <div className="mb-3">
         <label className="form-label">Last Name</label>
-        <input type="text" value={state.LastName} onChange={handleLastNameChange} className="form-control" placeholder="Enter last name" />
+        <input
+          type="text"
+          value={state.LastName}
+          onChange={handleLastNameChange}
+          className="form-control"
+          placeholder="Enter last name"
+        />
       </div>
       <div className="mb-3">
         <label className="form-label">Email address</label>
-        <input type="email" value={state.Email} onChange={handleEmailChange} className={!isEmailValid ? 'form-control is-invalid' : 'form-control'} placeholder="Enter email" />
-        {!isEmailValid && <div className="text-danger">Please enter a valid email address.</div>}
+        <input
+          type="email"
+          value={state.Email}
+          onChange={handleEmailChange}
+          className={!isEmailValid ? "form-control is-invalid" : "form-control"}
+          placeholder="Enter email"
+        />
+        {!isEmailValid && (
+          <div className="text-danger">Please enter a valid email address.</div>
+        )}
       </div>
       <div className="mb-3">
         <label className="form-label">Password</label>
-        <input type="password" value={state.Password} onChange={handlePasswordChange} className="form-control" placeholder="Password" />
+        <input
+          type="password"
+          value={state.Password}
+          onChange={handlePasswordChange}
+          className="form-control"
+          placeholder="Password"
+        />
       </div>
       <div className="mb-6">
-        <button type="button" onClick={handleFormSubmit} disabled={isButtonDisabled} className="btn btn-primary btn-lg btn-block w-100 mb-3">Signup</button>
-        <button type="button" onClick={handleReset} className="btn btn-outline-secondary btn-lg btn-block w-100">Reset</button>
+        <button
+          type="button"
+          onClick={handleFormSubmit}
+          disabled={isButtonDisabled}
+          className="btn btn-primary btn-lg btn-block w-100 mb-3"
+        >
+          Signup
+        </button>
+        <button
+          type="button"
+          onClick={handleReset}
+          className="btn btn-outline-secondary btn-lg btn-block w-100"
+        >
+          Reset
+        </button>
       </div>
     </form>
-
-    // <div>
-    //   <h3>Register</h3>
-    //   <div>
-    //     <label>
-    //       First Name:
-    //       <input
-    //         type="text"
-    //         value={state.FirstName}
-    //         onChange={handleFirstNameChange}
-    //       />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>Last Name:</label>
-    //     <input
-    //       type="text"
-    //       value={state.LastName}
-    //       onChange={handleLastNameChange}
-    //     />
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Email:
-    //       <input type="text" value={state.Email} onChange={handleEmailChange} />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Password:
-    //       <input
-    //         type="password"
-    //         value={state.Password}
-    //         onChange={handlePasswordChange}
-    //       />
-    //     </label>
-    //   </div>
-    //   <button type="submit" onClick={handleFormSubmit}>
-    //     Submit
-    //   </button>
-    //   <button onClick={handleReset}>Reset Fields</button>
-    // </div>
   );
 }
 

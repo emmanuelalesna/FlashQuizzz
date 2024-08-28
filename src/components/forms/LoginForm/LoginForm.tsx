@@ -2,7 +2,7 @@ import React, { useReducer, useState } from "react";
 
 import LoginFormState from "../../../interfaces/ILoginFormState";
 import UserService from "../../../services/UserService";
-// import { Navigate } from "react-router-dom"; // TODO: #17 Rework: Navigate cannot be used here in LoginForm.tsx
+import { Navigate } from "react-router-dom";
 
 type ActionType =
   | { type: "setEmail"; payload: string }
@@ -40,7 +40,6 @@ function LoginForm({ userService }: { userService: UserService }) {
 
   async function submit() {
     try {
-      // const navigate = useNavigate();
       console.log("In Submit function");
       const response = await userService.login(state);
       console.log(response);
@@ -48,13 +47,10 @@ function LoginForm({ userService }: { userService: UserService }) {
         console.log(response.data);
         console.log("Logged In");
         // Store the object in local storage
-        localStorage.setItem("userObject", JSON.stringify(response.data));
+        localStorage.setItem("userObject", response.data);
 
-        // Redirect to dashboard page
-        setRedirectToDashboard(true);
-      } else {
-        console.log("Login Failed");
-        alert("Email or Password is incorrect.");
+        // Redirect to home page
+        // navigate('/my-cards');
       }
     } catch (error) {
       console.error("Error submitting user data", error);
@@ -62,9 +58,9 @@ function LoginForm({ userService }: { userService: UserService }) {
     }
   }
 
-  // if (redirectToDashboard) {
-  //   return <Navigate to="/dashboard" />;
-  // }
+  if (redirectToDashboard) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <form className="mb-6">
@@ -90,7 +86,7 @@ function LoginForm({ userService }: { userService: UserService }) {
         />
       </div>
       <button
-        type="button"
+        type="submit"
         onClick={submit}
         className="btn btn-primary btn-block w-100"
       >
