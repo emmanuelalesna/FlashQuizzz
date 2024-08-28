@@ -8,6 +8,7 @@ import { test, expect, describe } from "@jest/globals";
 import userEvent from "@testing-library/user-event";
 import { AxiosResponse } from "axios";
 import options from "../../SelectOptions";
+import selectEvent from "react-select-event";
 describe("Edit Flash Card Form", () => {
   test("edit flash card form renders the flash card details", () => {
     // arrange
@@ -113,16 +114,16 @@ describe("Edit Flash Card Form", () => {
     );
     const questionInput = screen.getByPlaceholderText("Question");
     const answerInput = screen.getByPlaceholderText("Answer");
-    //const selectInput = screen.getByText(options[2].label);
+    const selectInput = screen.getByText(options[2].label);
 
     // act: user can edit question, answer, and category
     await userEvent.type(questionInput, "Edited Question");
     await userEvent.type(answerInput, "Edited Answer");
-    // await userEvent.selectOptions(selectInput, "3");
+    await selectEvent.select(selectInput, options[3].label);
 
     // assert: new edits are reflected in DOM
     expect(questionInput).toHaveValue("Edited Question");
     expect(answerInput).toHaveValue("Edited Answer");
-    // expect(selectInput).toHaveValue(options[3].label); // TODO: configure select testing
+    expect(selectInput).toHaveValue(options[3].label); // TODO: configure select testing
   });
 });
