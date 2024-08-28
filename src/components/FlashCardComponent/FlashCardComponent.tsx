@@ -6,7 +6,7 @@ import FlashCardDeleter from "../FlashCardDeleter/FlashCardDeleter";
 import CreateRootEditSingleton from "./CreateRootEditSingleton";
 import CreateRootDeleteSingleton from "./CreateRootDeleteSingleton";
 import Popup from "reactjs-popup";
-// import "reactjs-popup/dist/index.css";
+// import "reactjs-popup/dist/index.css"; //TODO: #14 REMOVE  / Rework - breaks running of component
 import Category from "../../interfaces/Category";
 
 /**

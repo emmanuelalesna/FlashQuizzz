@@ -32,17 +32,21 @@ const testCards: IFlashCard["FlashCard"][] = [
   },
 ];
 
-describe("Flash Card Fetcher", () => {
-  test("renders fetched flash card details", () => {
+describe("Flash Card Fetcher", async () => {
+  test("renders fetched flash card details", async () => {
     // arrange
     const flashCardService = new FlashcardService();
     const serviceSpy = jest.spyOn(flashCardService, "getFlashCards");
-    serviceSpy.mockResolvedValue({data: testCards} as AxiosResponse);
+    serviceSpy.mockResolvedValue({ data: testCards } as AxiosResponse);
     render(<FlashCardFetcher flashCardService={flashCardService} />);
 
-    testCards.forEach((flashCard) => {
-      expect(screen.getByText(flashCard.FlashCardQuestion)).toBeInTheDocument();
-      expect(screen.getByText(flashCard.FlashCardAnswer)).toBeInTheDocument();
+    testCards.forEach(async (flashCard) => {
+      expect(
+        await screen.findByText(flashCard.FlashCardQuestion)
+      ).toBeInTheDocument();
+      expect(
+        await screen.findByText(flashCard.FlashCardAnswer)
+      ).toBeInTheDocument();
     });
   });
 });
