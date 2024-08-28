@@ -1,6 +1,6 @@
 interface IFlashCard {
   FlashCard: {
-    UserID?: number;
+    UserID?: string;
     FlashCardID?: number;
     FlashCardQuestion: string;
     FlashCardAnswer: string;
