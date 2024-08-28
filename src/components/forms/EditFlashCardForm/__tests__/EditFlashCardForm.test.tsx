@@ -124,6 +124,6 @@ describe("Edit Flash Card Form", () => {
     // assert: new edits are reflected in DOM
     expect(questionInput).toHaveValue("Edited Question");
     expect(answerInput).toHaveValue("Edited Answer");
-    expect(selectInput).toHaveValue(options[3].label); // TODO: configure select testing
+    expect(screen.getByText(options[3].label)).toBeInTheDocument();
   });
 });
