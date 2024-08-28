@@ -17,6 +17,7 @@ describe("Edit Flash Card Form", () => {
         FlashCardQuestion: "Question",
         FlashCardAnswer: "Answer",
         CreatedDate: new Date(Date.now()),
+        FlashCardCategory: 1,
       },
     };
     const flashCardService = new FlashCardService();
@@ -41,6 +42,7 @@ describe("Edit Flash Card Form", () => {
         FlashCardQuestion: "Question",
         FlashCardAnswer: "Answer",
         CreatedDate: new Date(Date.now()),
+        FlashCardCategory: 1,
       },
     };
     const flashCardService = new FlashCardService();
@@ -58,7 +60,7 @@ describe("Edit Flash Card Form", () => {
     const clickButton = () => userEvent.click(submitButton);
     //act: click submit button
     await clickButton();
-    // assert:  calls on the mocked function serviceSpy 
+    // assert:  calls on the mocked function serviceSpy
     expect(serviceSpy).toHaveBeenCalled();
   });
 });

@@ -2,11 +2,11 @@ import FlashCardComponent from "../FlashCardComponent";
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
-import { test, expect, describe } from "@jest/globals";
+import { it, expect, describe } from "@jest/globals";
 import IFlashCard from "../../../interfaces/IFlashCard";
 
 describe("Flash Card Component", () => {
-  test("flash card component renders properly", () => {
+  it("renders the flash card details", () => {
     // arrange
     const flashCard: IFlashCard = {
       FlashCard: {
@@ -14,6 +14,7 @@ describe("Flash Card Component", () => {
         FlashCardQuestion: "Question",
         FlashCardAnswer: "Answer",
         CreatedDate: new Date(Date.now()),
+        FlashCardCategory: 1,
       },
     };
 

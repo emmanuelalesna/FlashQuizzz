@@ -9,30 +9,6 @@ function FlashCardFetcher({
 }: {
   flashCardService: FlashcardService;
 }) {
-  // test data
-  // const testCards: IFlashCard["FlashCard"][] = [
-  //   {
-  //     FlashCardID: 1,
-  //     FlashCardQuestion: "What is React?",
-  //     FlashCardAnswer: "A library for managing user interfaces",
-  //     FlashCardCategory: Category.HTML_CSS,
-  //     CreatedDate: new Date(),
-  //   },
-  //   {
-  //     FlashCardID: 2,
-  //     FlashCardQuestion: "What is API?",
-  //     FlashCardAnswer: "Application Programming Interface",
-  //     FlashCardCategory: Category.JavaScript,
-  //     CreatedDate: new Date(),
-  //   },
-  //   {
-  //     FlashCardID: 3,
-  //     FlashCardQuestion: "What is JSX?",
-  //     FlashCardAnswer: "JavaScript XML",
-  //     FlashCardCategory: Category.React,
-  //     CreatedDate: new Date(),
-  //   },
-  // ];
   const [flashCards, setFlashCards] =
     // for testing
     // useState<IFlashCard["FlashCard"][]>(testCards);
@@ -49,15 +25,14 @@ function FlashCardFetcher({
     }
     fetchFlashCards();
   }, [flashCardService]);
-  const FlashCardComponents = flashCards.map((item, index) => (
-    <FlashCardComponent key={index} FlashCard={item} />
-  ));
   return (
     <div>
       <h3>Flash cards here:</h3>
       <ul>
         {flashCards.length > 0 ? (
-          FlashCardComponents
+          flashCards.map((item, index) => (
+            <FlashCardComponent key={index} FlashCard={item} />
+          ))
         ) : (
           <p>Flash cards loading...</p>
         )}
@@ -68,3 +43,27 @@ function FlashCardFetcher({
 }
 
 export default FlashCardFetcher;
+// test data
+// const testCards: IFlashCard["FlashCard"][] = [
+//   {
+//     FlashCardID: 1,
+//     FlashCardQuestion: "What is React?",
+//     FlashCardAnswer: "A library for managing user interfaces",
+//     FlashCardCategory: Category.HTML_CSS,
+//     CreatedDate: new Date(),
+//   },
+//   {
+//     FlashCardID: 2,
+//     FlashCardQuestion: "What is API?",
+//     FlashCardAnswer: "Application Programming Interface",
+//     FlashCardCategory: Category.JavaScript,
+//     CreatedDate: new Date(),
+//   },
+//   {
+//     FlashCardID: 3,
+//     FlashCardQuestion: "What is JSX?",
+//     FlashCardAnswer: "JavaScript XML",
+//     FlashCardCategory: Category.React,
+//     CreatedDate: new Date(),
+//   },
+// ];
