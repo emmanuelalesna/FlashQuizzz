@@ -14,29 +14,26 @@ describe("Login Form", () => {
     render(<LoginForm userService={new UserService()} />);
 
     // assert
+    expect(screen.getByText("Email")).toBeInTheDocument();
+    expect(screen.getByText("Password")).toBeInTheDocument();
     expect(screen.getByText("Login")).toBeInTheDocument();
   });
 
   it("calls event handler when the submit button is clicked", async () => {
     // arrange: render component and grab submit button
     const userService = new UserService();
-    render(<LoginForm userService={userService} />);
-    const loginButton = screen.getByText("Login");
     const mockAxiosResponse = {
       status: 200,
       statusText: "OK",
     };
     const serviceSpy = jest.spyOn(userService, "login");
     serviceSpy.mockResolvedValue(mockAxiosResponse as AxiosResponse);
+    render(<LoginForm userService={userService} />);
+    const loginButton = screen.getByText("Login");
     // act: click submit button
     const click = () => userEvent.click(loginButton);
-    try {
-      await click();
-    } catch {
-      // expect(serviceSpy).toHaveBeenCalled(); // should throw error
-    } finally {
-      // assert: the spy should have been calld
-      expect(serviceSpy).toHaveBeenCalled();
-    }
+    await click();
+
+    expect(serviceSpy).toHaveBeenCalled();
   });
 });

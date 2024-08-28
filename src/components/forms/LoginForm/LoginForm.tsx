@@ -37,7 +37,7 @@ function LoginForm({ userService }: { userService: UserService }) {
 
   async function submit() {
     try {
-      const navigate = useNavigate();
+      ///const navigate = useNavigate();
       console.log("In Submit function");
       const response = await userService.login(state);
       console.log(response);
@@ -45,8 +45,8 @@ function LoginForm({ userService }: { userService: UserService }) {
         console.log(response.data);
         console.log("Logged In");
         // Store the object in local storage
-        localStorage.setItem('userObject', response.data);
-            
+        localStorage.setItem("userObject", response.data);
+
         // Redirect to home page
         // navigate('/my-cards');
       }
@@ -59,13 +59,31 @@ function LoginForm({ userService }: { userService: UserService }) {
       <h4>&nbsp;</h4>
       <div className="mb-3">
         <label className="form-label">Email address</label>
-        <input type="email" value={state.email} onChange={handleEmailChange} className="form-control" placeholder="Enter email" />
+        <input
+          type="email"
+          value={state.email}
+          onChange={handleEmailChange}
+          className="form-control"
+          placeholder="Enter email"
+        />
       </div>
       <div className="mb-3">
         <label className="form-label">Password</label>
-        <input type="password" value={state.password} onChange={handlePasswordChange} className="form-control" placeholder="Password" />
+        <input
+          type="password"
+          value={state.password}
+          onChange={handlePasswordChange}
+          className="form-control"
+          placeholder="Password"
+        />
       </div>
-      <button type="submit" onClick={submit} className="btn btn-primary btn-block w-100">Login</button>
+      <button
+        type="submit"
+        onClick={submit}
+        className="btn btn-primary btn-block w-100"
+      >
+        Login
+      </button>
       {/* <div>
         {state.email}
         {state.password}
