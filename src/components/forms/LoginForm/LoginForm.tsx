@@ -37,15 +37,15 @@ function LoginForm({ userService }: { userService: UserService }) {
 
   async function submit() {
     try {
-      const navigate = useNavigate();
-      console.log("In Submit function");
+      // const navigate = useNavigate();
+      // console.log("In Submit function");
       const response = await userService.login(state);
-      console.log(response);
+      // console.log(response);
       if (response.status == 200) {
         console.log(response.data);
-        console.log("Logged In");
+        // console.log("Logged In");
         // Store the object in local storage
-        localStorage.setItem('userObject', response.data);
+        localStorage.setItem('userObject', JSON.stringify(response.data));
             
         // Redirect to home page
         // navigate('/my-cards');
@@ -65,7 +65,7 @@ function LoginForm({ userService }: { userService: UserService }) {
         <label className="form-label">Password</label>
         <input type="password" value={state.password} onChange={handlePasswordChange} className="form-control" placeholder="Password" />
       </div>
-      <button type="submit" onClick={submit} className="btn btn-primary btn-block w-100">Login</button>
+      <button type="button" onClick={submit} className="btn btn-primary btn-block w-100">Login</button>
       {/* <div>
         {state.email}
         {state.password}

@@ -56,17 +56,17 @@ function RegisterForm({ userService }: { userService: UserService }) {
   async function handleFormSubmit() {
     try {
       const response = await userService.register(state);
-      if (response.status) {
+      if (response.status == 200) {
         console.log("registered");
-        await userService.register({
-          FirstName: state.FirstName,
-          LastName: state.LastName,
-          Email: state.Email,
-          Password: state.Password
-        });
+        // await userService.register({
+        //   FirstName: state.FirstName,
+        //   LastName: state.LastName,
+        //   Email: state.Email,
+        //   Password: state.Password
+        // });
       }
     } catch (error) {
-      console.error("Error submitting user data", error);
+      console.error(error);
     }
   }
 
