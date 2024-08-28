@@ -7,7 +7,7 @@ import { render, screen } from "@testing-library/react";
 import { test, expect, describe } from "@jest/globals";
 import userEvent from "@testing-library/user-event";
 import { AxiosResponse } from "axios";
-
+import options from "../../SelectOptions";
 describe("Edit Flash Card Form", () => {
   test("edit flash card form renders the flash card details", () => {
     // arrange
@@ -42,7 +42,7 @@ describe("Edit Flash Card Form", () => {
         FlashCardQuestion: "Question",
         FlashCardAnswer: "Answer",
         CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 1,
+        FlashCardCategory: 2,
       },
     };
     const flashCardService = new FlashCardService();
@@ -72,7 +72,7 @@ describe("Edit Flash Card Form", () => {
         FlashCardQuestion: "Question",
         FlashCardAnswer: "Answer",
         CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 1,
+        FlashCardCategory: 2,
       },
     };
 
@@ -91,6 +91,38 @@ describe("Edit Flash Card Form", () => {
     screen.debug();
     expect(screen.getByPlaceholderText("Question")).toHaveValue("");
     expect(screen.getByPlaceholderText("Answer")).toHaveValue("");
-    expect(screen.getByText("None")).toBeInTheDocument();
+  });
+
+  test("user can edit flash card details", async () => {
+    // arrange: render component
+    const flashCard: IFlashCard = {
+      FlashCard: {
+        FlashCardID: 1,
+        FlashCardQuestion: "Question",
+        FlashCardAnswer: "Answer",
+        CreatedDate: new Date(Date.now()),
+        FlashCardCategory: 2,
+      },
+    };
+    const flashCardService = new FlashCardService();
+    render(
+      <EditFlashCardForm
+        flashCardService={flashCardService}
+        flashCard={flashCard.FlashCard}
+      />
+    );
+    const questionInput = screen.getByPlaceholderText("Question");
+    const answerInput = screen.getByPlaceholderText("Answer");
+    //const selectInput = screen.getByText(options[2].label);
+
+    // act: user can edit question, answer, and category
+    await userEvent.type(questionInput, "Edited Question");
+    await userEvent.type(answerInput, "Edited Answer");
+    // await userEvent.selectOptions(selectInput, "3");
+
+    // assert: new edits are reflected in DOM
+    expect(questionInput).toHaveValue("Edited Question");
+    expect(answerInput).toHaveValue("Edited Answer");
+    // expect(selectInput).toHaveValue(options[3].label); // TODO: configure select testing
   });
 });

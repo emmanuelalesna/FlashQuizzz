@@ -40,17 +40,21 @@ function LoginForm({ userService }: { userService: UserService }) {
 
   async function submit() {
     try {
-      console.log("In Submit function");
+      //console.log("In Submit function");
       const response = await userService.login(state);
-      console.log(response);
+      //console.log(response);
       if (response.status == 200) {
-        console.log(response.data);
-        console.log("Logged In");
+        // console.log(response.data);
+        // console.log("Logged In");
         // Store the object in local storage
-        localStorage.setItem("userObject", response.data);
+        localStorage.setItem("userObject", JSON.stringify(response.data));
 
         // Redirect to home page
         // navigate('/my-cards');
+        setRedirectToDashboard(true);
+      } else {
+        console.log("Login Failed");
+        alert("Email or Password is incorrect.");
       }
     } catch (error) {
       console.error("Error submitting user data", error);
@@ -86,7 +90,7 @@ function LoginForm({ userService }: { userService: UserService }) {
         />
       </div>
       <button
-        type="submit"
+        type="button"
         onClick={submit}
         className="btn btn-primary btn-block w-100"
       >

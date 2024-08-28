@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
@@ -12,7 +9,7 @@ import userEvent from "@testing-library/user-event";
 import { AxiosResponse } from "axios";
 
 describe("Flash Card Deleter", () => {
-  it("renders properly", () => {
+  it("renders with confirmation message", () => {
     // arrange
     const flashCardService = new FlashcardService();
     const flashCard: IFlashCard = {
@@ -37,7 +34,7 @@ describe("Flash Card Deleter", () => {
     expect(screen.getByText(message)).toBeInTheDocument();
   });
 
-  test("delete button calls event handler", async () => {
+  test("delete button calls deleteFlashCard", async () => {
     // arrange: render component and get delete button
     const flashCardService = new FlashcardService();
     const flashCard: IFlashCard = {
