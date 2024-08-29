@@ -27,7 +27,7 @@ describe("Create Flash Card Form", () => {
         flashCardQuestion: "Test Question",
         flashCardAnswer: "Test Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 3,
+        flashCardCategoryID: 3,
       },
     };
     const flashCardService = new FlashCardService();
@@ -41,13 +41,13 @@ describe("Create Flash Card Form", () => {
     const selectInput = screen.getByText("Select...");
     await selectEvent.select(
       selectInput,
-      options[mFlashCard.FlashCard.flashCardCategory].label
+      options[mFlashCard.FlashCard.flashCardCategoryID].label
     );
 
     expect(questionInput).toHaveValue(mFlashCard.FlashCard.flashCardQuestion);
     expect(answerInput).toHaveValue(mFlashCard.FlashCard.flashCardAnswer);
     expect(
-      screen.getByText(options[mFlashCard.FlashCard.flashCardCategory].label)
+      screen.getByText(options[mFlashCard.FlashCard.flashCardCategoryID].label)
     ).toBeInTheDocument();
   });
 
@@ -63,7 +63,7 @@ describe("Create Flash Card Form", () => {
         flashCardQuestion: "Question",
         flashCardAnswer: "Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 2,
+        flashCardCategoryID: 2,
       },
     };
 
@@ -77,7 +77,7 @@ describe("Create Flash Card Form", () => {
     const selectInput = screen.getByText("Select...");
     await selectEvent.select(
       selectInput,
-      options[mFlashCard.FlashCard.flashCardCategory].label
+      options[mFlashCard.FlashCard.flashCardCategoryID].label
     );
 
     //act: click submit button

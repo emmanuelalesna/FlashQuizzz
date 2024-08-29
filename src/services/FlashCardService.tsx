@@ -12,7 +12,7 @@ class FlashCardService {
       FlashCard.userID == null ||
       FlashCard.flashCardQuestion == "" ||
       FlashCard.flashCardAnswer == "" ||
-      FlashCard.flashCardCategory == null ||
+      FlashCard.flashCardCategoryID == null ||
       FlashCard.createdDate == null
     ) {
       throw new Error("Flash card information is incomplete.");
@@ -35,7 +35,7 @@ class FlashCardService {
       FlashCard.userID == null ||
       FlashCard.flashCardQuestion == "" ||
       FlashCard.flashCardAnswer == "" ||
-      FlashCard.flashCardCategory == null ||
+      FlashCard.flashCardCategoryID == null ||
       FlashCard.createdDate == null
     ) {
       throw new Error("Flash card information is incomplete.");

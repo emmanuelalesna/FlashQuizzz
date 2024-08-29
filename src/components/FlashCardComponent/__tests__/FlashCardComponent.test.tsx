@@ -14,7 +14,7 @@ describe("Flash Card Component", () => {
         flashCardQuestion: "My Question",
         flashCardAnswer: "My Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 1,
+        flashCardCategoryID: 1,
       },
     };
 

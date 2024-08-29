@@ -34,7 +34,7 @@ function FlashCardComponent({ FlashCard }: IFlashCard): JSX.Element {
         <p>{flashCard.flashCardID}</p>
         <p>{flashCard.flashCardQuestion}</p>
         <p>{flashCard.flashCardAnswer}</p>
-        <p>{getCategoryByValue(flashCard.flashCardCategory)}</p>
+        <p>{getCategoryByValue(flashCard.flashCardCategoryID)}</p>
         <p>{flashCard.createdDate.toString()}</p>
 
         <Popup trigger={<button> Edit</button>} modal>

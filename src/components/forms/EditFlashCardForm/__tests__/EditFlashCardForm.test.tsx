@@ -18,7 +18,7 @@ describe("Edit Flash Card Form", () => {
         flashCardQuestion: "Question",
         flashCardAnswer: "Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 1,
+        flashCardCategoryID: 1,
       },
     };
     const flashCardService = new FlashCardService();
@@ -43,7 +43,7 @@ describe("Edit Flash Card Form", () => {
         flashCardQuestion: "Question",
         flashCardAnswer: "Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 2,
+        flashCardCategoryID: 2,
       },
     };
     const flashCardService = new FlashCardService();
@@ -73,7 +73,7 @@ describe("Edit Flash Card Form", () => {
         flashCardQuestion: "Question",
         flashCardAnswer: "Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 2,
+        flashCardCategoryID: 2,
       },
     };
 
@@ -102,7 +102,7 @@ describe("Edit Flash Card Form", () => {
         flashCardQuestion: "Question",
         flashCardAnswer: "Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 2,
+        flashCardCategoryID: 2,
       },
     };
     const flashCardService = new FlashCardService();

@@ -91,7 +91,7 @@ function EditFlashCardForm(props: {
           flashCardID: flashCardState.flashCardID,
           flashCardQuestion: state.FlashCardQuestion,
           flashCardAnswer: state.FlashCardAnswer,
-          flashCardCategory: state.FlashCardCategory,
+          flashCardCategoryID: state.FlashCardCategory,
           createdDate: new Date(),
         },
       };
@@ -133,7 +133,7 @@ function EditFlashCardForm(props: {
           <Select
             options={options}
             onChange={(choice) => handleCategoryChange(choice!.value)}
-            defaultValue={options[flashCardState.flashCardCategory]}
+            defaultValue={options[flashCardState.flashCardCategoryID]}
           />
         </label>
         <button type="button" onClick={handleReset}>

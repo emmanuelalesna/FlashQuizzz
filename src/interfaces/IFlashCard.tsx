@@ -4,7 +4,7 @@ interface IFlashCard {
     flashCardID?: number;
     flashCardQuestion: string;
     flashCardAnswer: string;
-    flashCardCategory: number;
+    flashCardCategoryID: number;
     createdDate: Date;
   };
 }
