@@ -34,7 +34,7 @@ function FlashCardFetcher({
             <FlashCardComponent key={index} FlashCard={item} />
           ))
         ) : (
-          <p>Flash cards loading...</p>
+          <p>No flash cards yet</p>
         )}
       </ul>
       <p></p>

@@ -4,7 +4,7 @@ import IFlashCard from "../interfaces/IFlashCard";
 
 class FlashCardService {
   getFlashCards(): Promise<AxiosResponse> {
-    return axios.get(url + flashCardEndpoint);
+    return axios.get(url + flashCardEndpoint +"/user/" + localStorage.getItem("userID"));
   }
 
   postFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
