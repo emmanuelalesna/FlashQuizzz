@@ -10,7 +10,7 @@ import { AxiosResponse } from "axios";
 import options from "../../SelectOptions";
 import selectEvent from "react-select-event";
 describe("Create Flash Card Form", () => {
-  xit("renders the form to the DOM", () => {
+  it("renders the form to the DOM", () => {
     // arrange
     render(<CreateFlashCardForm flashCardService={new FlashCardService()} />);
 
