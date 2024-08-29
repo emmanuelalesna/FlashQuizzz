@@ -7,7 +7,7 @@ export default {
   },
   moduleFileExtensions: ["ts", "tsx", "js"],
   collectCoverage: true,
-  coverageReporters: ["json", "html", "text"],
+  coverageReporters: ["json", "html", "text", "lcov"],
   coverageThreshold: {
     global: {
       branches: 20,

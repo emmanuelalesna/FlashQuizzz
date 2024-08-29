@@ -24,7 +24,7 @@ function FlashCardComponent({ FlashCard }: IFlashCard): JSX.Element {
 
   function getCategoryByValue(input: number): string | undefined {
     return Object.keys(Category).find(
-      (item: string) => Category[item] === input
+      (item: string) => Category[item as keyof typeof Category] === input
     );
   }
 
