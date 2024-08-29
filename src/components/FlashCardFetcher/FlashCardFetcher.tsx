@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import FlashcardService from "../../services/FlashCardService";
 import IFlashCard from "../../interfaces/IFlashCard";
 import FlashCardComponent from "../FlashCardComponent/FlashCardComponent";
-import FlashCardConverterUtility from "./FlashCardConverterUtility";
 
 function FlashCardFetcher({
   flashCardService,
@@ -17,12 +16,9 @@ function FlashCardFetcher({
   useEffect(() => {
     async function fetchFlashCards() {
       try {
-        const response = await flashCardService.getFlashCards();
         // comment out for testing
-        const cardArray = response.data.map((card) => {
-          return FlashCardConverterUtility(card);
-        });
-        setFlashCards(cardArray);
+        const response = await flashCardService.getFlashCards();
+        setFlashCards(response.data);
       } catch (error) {
         console.error("Error fetching flash cards: ", error);
       }

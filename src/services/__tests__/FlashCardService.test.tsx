@@ -28,11 +28,11 @@ describe("Flash Card Service", () => {
       // arrange: create flashcard
       const flashCard: IFlashCard = {
         FlashCard: {
-          FlashCardQuestion: "",
-          FlashCardAnswer: "",
-          FlashCardID: 1,
-          CreatedDate: new Date(Date.now()),
-          FlashCardCategory: 1,
+          flashCardQuestion: "",
+          flashCardAnswer: "",
+          flashCardID: 1,
+          createdDate: new Date(Date.now()),
+          flashCardCategory: 1,
         },
       };
 
@@ -48,12 +48,12 @@ describe("Flash Card Service", () => {
     test("calls axios with correct url for a complete flash card", async () => {
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: "1",
-          FlashCardQuestion: "Question",
-          FlashCardAnswer: "Answer",
-          FlashCardID: 1,
-          CreatedDate: new Date(Date.now()),
-          FlashCardCategory: 1,
+          userID: "1",
+          flashCardQuestion: "Question",
+          flashCardAnswer: "Answer",
+          flashCardID: 1,
+          createdDate: new Date(Date.now()),
+          flashCardCategory: 1,
         },
       };
       const axiosCallMock = (url: string): Promise<object> =>
@@ -76,12 +76,12 @@ describe("Flash Card Service", () => {
       // arrange: create flashcard
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: "1",
-          FlashCardQuestion: "",
-          FlashCardAnswer: "",
-          FlashCardID: 1,
-          CreatedDate: new Date(Date.now()),
-          FlashCardCategory: 1,
+          userID: "1",
+          flashCardQuestion: "",
+          flashCardAnswer: "",
+          flashCardID: 1,
+          createdDate: new Date(Date.now()),
+          flashCardCategory: 1,
         },
       };
 
@@ -97,12 +97,12 @@ describe("Flash Card Service", () => {
     it("calls axios with correct url for a complete flash card", async () => {
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: "1",
-          FlashCardQuestion: "Question",
-          FlashCardAnswer: "Answer",
-          FlashCardID: 1,
-          CreatedDate: new Date(Date.now()),
-          FlashCardCategory: 1,
+          userID: "1",
+          flashCardQuestion: "Question",
+          flashCardAnswer: "Answer",
+          flashCardID: 1,
+          createdDate: new Date(Date.now()),
+          flashCardCategory: 1,
         },
       };
       const axiosCallMock = (url: string): Promise<object> =>
@@ -117,7 +117,7 @@ describe("Flash Card Service", () => {
       //assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
       expect(calledURL).toEqual(
-        url + flashCardEndpoint + "/" + flashCard.FlashCard.FlashCardID
+        url + flashCardEndpoint + "/" + flashCard.FlashCard.flashCardID
       );
     });
   });
@@ -126,12 +126,12 @@ describe("Flash Card Service", () => {
     it("calls axios with correct url for a complete flash card", async () => {
       const flashCard: IFlashCard = {
         FlashCard: {
-          UserID: "1",
-          FlashCardQuestion: "Question",
-          FlashCardAnswer: "Answer",
-          FlashCardID: 1,
-          CreatedDate: new Date(Date.now()),
-          FlashCardCategory: 1,
+          userID: "1",
+          flashCardQuestion: "Question",
+          flashCardAnswer: "Answer",
+          flashCardID: 1,
+          createdDate: new Date(Date.now()),
+          flashCardCategory: 1,
         },
       };
       const axiosCallMock = (url: string): Promise<object> =>
@@ -148,7 +148,7 @@ describe("Flash Card Service", () => {
       //assert: mock should have been invoked with correct url
       expect(axiosMock).toHaveBeenCalled();
       expect(calledURL).toEqual(
-        url + flashCardEndpoint + "/" + flashCard.FlashCard.FlashCardID
+        url + flashCardEndpoint + "/" + flashCard.FlashCard.flashCardID
       );
     });
   });

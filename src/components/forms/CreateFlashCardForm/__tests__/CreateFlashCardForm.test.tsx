@@ -23,11 +23,11 @@ describe("Create Flash Card Form", () => {
     // arrange
     const mFlashCard: IFlashCard = {
       FlashCard: {
-        FlashCardID: 1,
-        FlashCardQuestion: "Test Question",
-        FlashCardAnswer: "Test Answer",
-        CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 3,
+        flashCardID: 1,
+        flashCardQuestion: "Test Question",
+        flashCardAnswer: "Test Answer",
+        createdDate: new Date(Date.now()),
+        flashCardCategory: 3,
       },
     };
     const flashCardService = new FlashCardService();
@@ -35,20 +35,20 @@ describe("Create Flash Card Form", () => {
 
     // act: type in question, answer, and select category
     const questionInput = screen.getByLabelText("Question:");
-    await userEvent.type(questionInput, mFlashCard.FlashCard.FlashCardQuestion);
+    await userEvent.type(questionInput, mFlashCard.FlashCard.flashCardQuestion);
     const answerInput = screen.getByLabelText("Answer:");
-    await userEvent.type(answerInput, mFlashCard.FlashCard.FlashCardAnswer);
+    await userEvent.type(answerInput, mFlashCard.FlashCard.flashCardAnswer);
     const selectInput = screen.getByText("Select...");
     await selectEvent.select(
       selectInput,
-      options[mFlashCard.FlashCard.FlashCardCategory].label
+      options[mFlashCard.FlashCard.flashCardCategory].label
     );
     //console.log(selectInput.innerHTML);
 
-    expect(questionInput).toHaveValue(mFlashCard.FlashCard.FlashCardQuestion);
-    expect(answerInput).toHaveValue(mFlashCard.FlashCard.FlashCardAnswer);
+    expect(questionInput).toHaveValue(mFlashCard.FlashCard.flashCardQuestion);
+    expect(answerInput).toHaveValue(mFlashCard.FlashCard.flashCardAnswer);
     expect(
-      screen.getByText(options[mFlashCard.FlashCard.FlashCardCategory].label)
+      screen.getByText(options[mFlashCard.FlashCard.flashCardCategory].label)
     ).toBeInTheDocument();
   });
 
@@ -60,11 +60,11 @@ describe("Create Flash Card Form", () => {
     render(<CreateFlashCardForm flashCardService={flashCardService} />);
     const mFlashCard: IFlashCard = {
       FlashCard: {
-        FlashCardID: 1,
-        FlashCardQuestion: "Question",
-        FlashCardAnswer: "Answer",
-        CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 2,
+        flashCardID: 1,
+        flashCardQuestion: "Question",
+        flashCardAnswer: "Answer",
+        createdDate: new Date(Date.now()),
+        flashCardCategory: 2,
       },
     };
 
@@ -72,13 +72,13 @@ describe("Create Flash Card Form", () => {
 
     // act: type in question, answer, and select category
     const questionInput = screen.getByLabelText("Question:");
-    await userEvent.type(questionInput, mFlashCard.FlashCard.FlashCardQuestion);
+    await userEvent.type(questionInput, mFlashCard.FlashCard.flashCardQuestion);
     const answerInput = screen.getByLabelText("Answer:");
-    await userEvent.type(answerInput, mFlashCard.FlashCard.FlashCardAnswer);
+    await userEvent.type(answerInput, mFlashCard.FlashCard.flashCardAnswer);
     const selectInput = screen.getByText("Select...");
     await selectEvent.select(
       selectInput,
-      options[mFlashCard.FlashCard.FlashCardCategory].label
+      options[mFlashCard.FlashCard.flashCardCategory].label
     );
 
     //act: click submit button

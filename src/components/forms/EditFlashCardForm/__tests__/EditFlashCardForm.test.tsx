@@ -14,11 +14,11 @@ describe("Edit Flash Card Form", () => {
     // arrange
     const flashCard: IFlashCard = {
       FlashCard: {
-        FlashCardID: 1,
-        FlashCardQuestion: "Question",
-        FlashCardAnswer: "Answer",
-        CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 1,
+        flashCardID: 1,
+        flashCardQuestion: "Question",
+        flashCardAnswer: "Answer",
+        createdDate: new Date(Date.now()),
+        flashCardCategory: 1,
       },
     };
     const flashCardService = new FlashCardService();
@@ -39,11 +39,11 @@ describe("Edit Flash Card Form", () => {
     // arrange: render component
     const flashCard: IFlashCard = {
       FlashCard: {
-        FlashCardID: 1,
-        FlashCardQuestion: "Question",
-        FlashCardAnswer: "Answer",
-        CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 2,
+        flashCardID: 1,
+        flashCardQuestion: "Question",
+        flashCardAnswer: "Answer",
+        createdDate: new Date(Date.now()),
+        flashCardCategory: 2,
       },
     };
     const flashCardService = new FlashCardService();
@@ -69,11 +69,11 @@ describe("Edit Flash Card Form", () => {
     // arrange: render component
     const flashCard: IFlashCard = {
       FlashCard: {
-        FlashCardID: 1,
-        FlashCardQuestion: "Question",
-        FlashCardAnswer: "Answer",
-        CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 2,
+        flashCardID: 1,
+        flashCardQuestion: "Question",
+        flashCardAnswer: "Answer",
+        createdDate: new Date(Date.now()),
+        flashCardCategory: 2,
       },
     };
 
@@ -98,11 +98,11 @@ describe("Edit Flash Card Form", () => {
     // arrange: render component
     const flashCard: IFlashCard = {
       FlashCard: {
-        FlashCardID: 1,
-        FlashCardQuestion: "Question",
-        FlashCardAnswer: "Answer",
-        CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 2,
+        flashCardID: 1,
+        flashCardQuestion: "Question",
+        flashCardAnswer: "Answer",
+        createdDate: new Date(Date.now()),
+        flashCardCategory: 2,
       },
     };
     const flashCardService = new FlashCardService();
