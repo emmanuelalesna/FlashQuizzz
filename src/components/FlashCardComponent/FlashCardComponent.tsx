@@ -6,6 +6,7 @@ import FlashCardDeleter from "../FlashCardDeleter/FlashCardDeleter";
 import Popup from "reactjs-popup";
 // import "reactjs-popup/dist/index.css"; //TODO: #14 REMOVE  / Rework - breaks running of component
 import Category from "../../interfaces/Category";
+import "./FlashCardComponent.css";
 
 /**
  * A React component that displays a flashcard with a question, answer, and creation date.
@@ -17,6 +18,7 @@ import Category from "../../interfaces/Category";
 function FlashCardComponent({ FlashCard }: IFlashCard): JSX.Element {
   const [flashCard, setFlashCard] =
     React.useState<IFlashCard["FlashCard"]>(FlashCard);
+  const [onQuestionSide, setOnQuestionSide] = React.useState<boolean>(true);
 
   useEffect(() => {
     setFlashCard(FlashCard);
@@ -32,8 +34,11 @@ function FlashCardComponent({ FlashCard }: IFlashCard): JSX.Element {
     <div>
       <li>
         <p>{flashCard.flashCardID}</p>
-        <p>{flashCard.flashCardQuestion}</p>
-        <p>{flashCard.flashCardAnswer}</p>
+        <p className='flashCard' onClick={onQuestionSide ? () => setOnQuestionSide(false) : () => setOnQuestionSide(true)}>
+          {onQuestionSide ? flashCard.flashCardQuestion : flashCard.flashCardAnswer}
+        </p>
+        {/*<p>{flashCard.flashCardQuestion}</p>
+        <p>{flashCard.flashCardAnswer}</p>*/}
         <p>{getCategoryByValue(flashCard.flashCardCategoryID)}</p>
         <p>{flashCard.createdDate.toString()}</p>
 
