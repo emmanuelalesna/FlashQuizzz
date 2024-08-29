@@ -73,7 +73,7 @@ function CreateFlashCardForm({
           userID: userID,
           flashCardQuestion: state.FlashCardQuestion,
           flashCardAnswer: state.FlashCardAnswer,
-          flashCardCategory: state.FlashCardCategory,
+          flashCardCategoryID: state.FlashCardCategory,
           createdDate: new Date(),
         },
       };

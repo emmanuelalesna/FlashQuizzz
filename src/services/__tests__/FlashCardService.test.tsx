@@ -32,7 +32,7 @@ describe("Flash Card Service", () => {
           flashCardAnswer: "",
           flashCardID: 1,
           createdDate: new Date(Date.now()),
-          flashCardCategory: 1,
+          flashCardCategoryID: 1,
         },
       };
 
@@ -53,7 +53,7 @@ describe("Flash Card Service", () => {
           flashCardAnswer: "Answer",
           flashCardID: 1,
           createdDate: new Date(Date.now()),
-          flashCardCategory: 1,
+          flashCardCategoryID: 1,
         },
       };
       const axiosCallMock = (url: string): Promise<object> =>
@@ -81,7 +81,7 @@ describe("Flash Card Service", () => {
           flashCardAnswer: "",
           flashCardID: 1,
           createdDate: new Date(Date.now()),
-          flashCardCategory: 1,
+          flashCardCategoryID: 1,
         },
       };
 
@@ -102,7 +102,7 @@ describe("Flash Card Service", () => {
           flashCardAnswer: "Answer",
           flashCardID: 1,
           createdDate: new Date(Date.now()),
-          flashCardCategory: 1,
+          flashCardCategoryID: 1,
         },
       };
       const axiosCallMock = (url: string): Promise<object> =>
@@ -131,7 +131,7 @@ describe("Flash Card Service", () => {
           flashCardAnswer: "Answer",
           flashCardID: 1,
           createdDate: new Date(Date.now()),
-          flashCardCategory: 1,
+          flashCardCategoryID: 1,
         },
       };
       const axiosCallMock = (url: string): Promise<object> =>

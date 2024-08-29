@@ -18,7 +18,7 @@ describe("Flash Card Deleter", () => {
         flashCardQuestion: "Question",
         flashCardAnswer: "Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 1,
+        flashCardCategoryID: 1,
       },
     };
     // act: render the component
@@ -43,7 +43,7 @@ describe("Flash Card Deleter", () => {
         flashCardQuestion: "Question",
         flashCardAnswer: "Answer",
         createdDate: new Date(Date.now()),
-        flashCardCategory: 1,
+        flashCardCategoryID: 1,
       },
     };
     render(
