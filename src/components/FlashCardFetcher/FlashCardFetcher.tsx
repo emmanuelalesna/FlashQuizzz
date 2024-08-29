@@ -19,7 +19,7 @@ function FlashCardFetcher({
       try {
         const response = await flashCardService.getFlashCards();
         // comment out for testing
-        const cardArray = response.data.map((card) => {
+        const cardArray = response.data.map((card: IFlashCard["FlashCard"]) => {
           return FlashCardConverterUtility(card);
         });
         setFlashCards(cardArray);

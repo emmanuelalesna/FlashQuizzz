@@ -1,5 +1,8 @@
 name: run-tests
 on:
+  push:
+    branches:
+      - testing
   pull_request:
     branches:
       - dev
@@ -8,10 +11,12 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    environment: development
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
+        with:
+          fetch-depth: 0
       - name: setup node env
         uses: actions/setup-node@v3
         with:
@@ -20,3 +25,7 @@ jobs:
         run: |
           npm ci
           npm run test
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}

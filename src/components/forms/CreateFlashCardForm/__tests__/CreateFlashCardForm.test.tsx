@@ -10,15 +10,15 @@ import { AxiosResponse } from "axios";
 import options from "../../SelectOptions";
 import selectEvent from "react-select-event";
 describe("Create Flash Card Form", () => {
-  // it("renders the form to the DOM", () => {
-  //   // arrange
-  //   render(<CreateFlashCardForm flashCardService={new FlashCardService()} />);
+  it("renders the form to the DOM", () => {
+    // arrange
+    render(<CreateFlashCardForm flashCardService={new FlashCardService()} />);
 
-  //   // assert
-  //   expect(screen.getByPlaceholderText("Question:")).toBeInTheDocument();
-  //   expect(screen.getByPlaceholderText("Answer:")).toBeInTheDocument();
-  //   expect(screen.getByText("Category:")).toBeInTheDocument();
-  // });
+    // assert
+    expect(screen.getByLabelText("Question:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Answer:")).toBeInTheDocument();
+    expect(screen.getByText("Select...")).toBeInTheDocument();
+  });
   test("controlled form renders the flash card details", async () => {
     // arrange
     const mFlashCard: IFlashCard = {
@@ -43,7 +43,6 @@ describe("Create Flash Card Form", () => {
       selectInput,
       options[mFlashCard.FlashCard.FlashCardCategory].label
     );
-    //console.log(selectInput.innerHTML);
 
     expect(questionInput).toHaveValue(mFlashCard.FlashCard.FlashCardQuestion);
     expect(answerInput).toHaveValue(mFlashCard.FlashCard.FlashCardAnswer);
