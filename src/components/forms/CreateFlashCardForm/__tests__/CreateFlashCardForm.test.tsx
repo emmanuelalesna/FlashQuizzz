@@ -15,9 +15,9 @@ describe("Create Flash Card Form", () => {
     render(<CreateFlashCardForm flashCardService={new FlashCardService()} />);
 
     // assert
-    expect(screen.getByPlaceholderText("Question:")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Answer:")).toBeInTheDocument();
-    expect(screen.getByText("Category:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Question:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Answer:")).toBeInTheDocument();
+    expect(screen.getByText("Select...")).toBeInTheDocument();
   });
   test("controlled form renders the flash card details", async () => {
     // arrange
