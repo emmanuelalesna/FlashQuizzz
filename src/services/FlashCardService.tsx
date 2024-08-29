@@ -9,11 +9,11 @@ class FlashCardService {
 
   postFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
     if (
-      FlashCard.UserID == null ||
-      FlashCard.FlashCardQuestion == "" ||
-      FlashCard.FlashCardAnswer == "" ||
-      FlashCard.FlashCardCategory == null ||
-      FlashCard.CreatedDate == null
+      FlashCard.userID == null ||
+      FlashCard.flashCardQuestion == "" ||
+      FlashCard.flashCardAnswer == "" ||
+      FlashCard.flashCardCategoryID == null ||
+      FlashCard.createdDate == null
     ) {
       throw new Error("Flash card information is incomplete.");
     }
@@ -32,15 +32,15 @@ class FlashCardService {
 
   putFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
     if (
-      FlashCard.UserID == null ||
-      FlashCard.FlashCardQuestion == "" ||
-      FlashCard.FlashCardAnswer == "" ||
-      FlashCard.FlashCardCategory == null ||
-      FlashCard.CreatedDate == null
+      FlashCard.userID == null ||
+      FlashCard.flashCardQuestion == "" ||
+      FlashCard.flashCardAnswer == "" ||
+      FlashCard.flashCardCategoryID == null ||
+      FlashCard.createdDate == null
     ) {
       throw new Error("Flash card information is incomplete.");
     }
-    return axios.put(url + flashCardEndpoint + "/" + FlashCard.FlashCardID, {
+    return axios.put(url + flashCardEndpoint + "/" + FlashCard.flashCardID, {
       ...FlashCard,
     });
   }

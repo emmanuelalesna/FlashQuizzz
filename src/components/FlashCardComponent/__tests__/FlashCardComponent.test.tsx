@@ -10,11 +10,11 @@ describe("Flash Card Component", () => {
     // arrange
     const flashCard: IFlashCard = {
       FlashCard: {
-        FlashCardID: 1,
-        FlashCardQuestion: "My Question",
-        FlashCardAnswer: "My Answer",
-        CreatedDate: new Date(Date.now()),
-        FlashCardCategory: 1,
+        flashCardID: 1,
+        flashCardQuestion: "My Question",
+        flashCardAnswer: "My Answer",
+        createdDate: new Date(Date.now()),
+        flashCardCategoryID: 1,
       },
     };
 

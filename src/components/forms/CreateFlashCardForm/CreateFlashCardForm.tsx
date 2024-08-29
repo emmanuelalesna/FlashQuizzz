@@ -70,17 +70,18 @@ function CreateFlashCardForm({
 
       const cardToPost: IFlashCard = {
         FlashCard: {
-          UserID: userID,
-          FlashCardQuestion: state.FlashCardQuestion,
-          FlashCardAnswer: state.FlashCardAnswer,
-          FlashCardCategory: state.FlashCardCategory,
-          CreatedDate: new Date(),
+          userID: userID,
+          flashCardQuestion: state.FlashCardQuestion,
+          flashCardAnswer: state.FlashCardAnswer,
+          flashCardCategoryID: state.FlashCardCategory,
+          createdDate: new Date(),
         },
       };
 
       const response = await flashCardService.postFlashCard(cardToPost);
       if (response.status) {
         console.log("flash card posted");
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error submitting flash card: ", error);
