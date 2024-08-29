@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import ICreateFlashCardFormState from "../../../interfaces/ICreateFlashCardFormState";
 import FlashCardService from "../../../services/FlashCardService";
 import IFlashCard from "../../../interfaces/IFlashCard";
@@ -58,7 +58,14 @@ function EditFlashCardForm(props: {
   flashCard: IFlashCard["FlashCard"];
   flashCardService: FlashCardService;
 }) {
+  const [flashCardState, setFlashCard] = React.useState<
+    IFlashCard["FlashCard"]
+  >(props.flashCard);
   const [state, dispatch] = useReducer(formReducer, defaultFlashCardState);
+
+  useEffect(() => {
+    setFlashCard(props.flashCard);
+  }, [props.flashCard]);
 
   function handleQuestionChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "editQuestion", payload: event?.target.value });
@@ -80,17 +87,18 @@ function EditFlashCardForm(props: {
     try {
       const cardToPut: IFlashCard = {
         FlashCard: {
-          UserID: props.flashCard.UserID,
-          FlashCardID: props.flashCard.FlashCardID,
-          FlashCardQuestion: state.FlashCardQuestion,
-          FlashCardAnswer: state.FlashCardAnswer,
-          FlashCardCategory: state.FlashCardCategory,
-          CreatedDate: new Date(),
+          userID: flashCardState.userID,
+          flashCardID: flashCardState.flashCardID,
+          flashCardQuestion: state.FlashCardQuestion,
+          flashCardAnswer: state.FlashCardAnswer,
+          flashCardCategory: state.FlashCardCategory,
+          createdDate: new Date(),
         },
       };
       const response = await props.flashCardService.putFlashCard(cardToPut);
       if (response.status) {
         console.log("flash card put");
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error submitting flash card: ", error);
@@ -101,13 +109,13 @@ function EditFlashCardForm(props: {
     <div>
       <h3>Edit a flash card</h3>
       <form>
-        <p>Card ID: {props.flashCard.FlashCardID}</p>
+        <p>Card ID: {flashCardState.flashCardID}</p>
         <label>Question: </label>
         <input
           type="text"
           name="question"
           value={state.FlashCardQuestion}
-          placeholder={props.flashCard.FlashCardQuestion}
+          placeholder={flashCardState.flashCardQuestion}
           onChange={handleQuestionChange}
         />
         <br />
@@ -116,7 +124,7 @@ function EditFlashCardForm(props: {
           type="text"
           name="answer"
           value={state.FlashCardAnswer}
-          placeholder={props.flashCard.FlashCardAnswer}
+          placeholder={flashCardState.flashCardAnswer}
           onChange={handleAnswerChange}
         />
         <br />
@@ -125,7 +133,7 @@ function EditFlashCardForm(props: {
           <Select
             options={options}
             onChange={(choice) => handleCategoryChange(choice!.value)}
-            defaultValue={options[props.flashCard.FlashCardCategory]}
+            defaultValue={options[flashCardState.flashCardCategory]}
           />
         </label>
         <button type="button" onClick={handleReset}>

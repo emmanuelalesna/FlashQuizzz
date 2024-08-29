@@ -1,11 +1,11 @@
 interface IFlashCard {
   FlashCard: {
-    UserID?: string;
-    FlashCardID?: number;
-    FlashCardQuestion: string;
-    FlashCardAnswer: string;
-    FlashCardCategory: number;
-    CreatedDate: Date;
+    userID?: string;
+    flashCardID?: number;
+    flashCardQuestion: string;
+    flashCardAnswer: string;
+    flashCardCategory: number;
+    createdDate: Date;
   };
 }
 export default IFlashCard;
