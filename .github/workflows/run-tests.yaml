@@ -3,7 +3,9 @@ on:
   push:
     branches:
       - testing
+      - main
   pull_request:
+    types: [opened, synchronize, reopened]
     branches:
       - dev
       - main
@@ -18,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup node env
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
       - name: test
@@ -28,4 +30,5 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

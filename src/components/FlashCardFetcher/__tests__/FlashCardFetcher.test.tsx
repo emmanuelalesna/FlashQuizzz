@@ -40,7 +40,7 @@ describe("Flash Card Fetcher", () => {
     const serviceSpy = jest.spyOn(flashCardService, "getFlashCards");
     serviceSpy.mockResolvedValue({ data: [] } as AxiosResponse);
     render(<FlashCardFetcher flashCardService={flashCardService} />);
-    const message = "Flash cards loading...";
+    const message = "No flash cards yet";
     // assert
     expect(screen.getByText(message)).toBeInTheDocument();
   });
