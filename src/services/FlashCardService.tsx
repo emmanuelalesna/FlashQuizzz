@@ -4,7 +4,11 @@ import IFlashCard from "../interfaces/IFlashCard";
 
 class FlashCardService {
   getFlashCards(): Promise<AxiosResponse> {
-    return axios.get(url + flashCardEndpoint);
+    const userID = localStorage.getItem("userID");
+    if (userID == null) {
+      throw new Error("User ID not found.");
+    }
+    return axios.get(url + flashCardEndpoint +"/user/" + userID);
   }
 
   postFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
