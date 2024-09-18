@@ -10,13 +10,10 @@ function FlashCardFetcher({
   flashCardService: FlashcardService;
 }) {
   const [flashCards, setFlashCards] =
-    // for testing
-    // useState<IFlashCard["FlashCard"][]>(testCards);
     useState<IFlashCard["FlashCard"][]>([]);
   useEffect(() => {
     async function fetchFlashCards() {
       try {
-        // comment out for testing
         const response = await flashCardService.getFlashCards();
         setFlashCards(response.data);
       } catch (error) {
@@ -43,27 +40,3 @@ function FlashCardFetcher({
 }
 
 export default FlashCardFetcher;
-// test data
-// const testCards: IFlashCard["FlashCard"][] = [
-//   {
-//     FlashCardID: 1,
-//     FlashCardQuestion: "What is React?",
-//     FlashCardAnswer: "A library for managing user interfaces",
-//     FlashCardCategory: Category.HTML_CSS,
-//     CreatedDate: new Date(),
-//   },
-//   {
-//     FlashCardID: 2,
-//     FlashCardQuestion: "What is API?",
-//     FlashCardAnswer: "Application Programming Interface",
-//     FlashCardCategory: Category.JavaScript,
-//     CreatedDate: new Date(),
-//   },
-//   {
-//     FlashCardID: 3,
-//     FlashCardQuestion: "What is JSX?",
-//     FlashCardAnswer: "JavaScript XML",
-//     FlashCardCategory: Category.React,
-//     CreatedDate: new Date(),
-//   },
-// ];

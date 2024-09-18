@@ -1,14 +1,15 @@
 // import "./App.css";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React from "react";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MyCardsPage from "./pages/MyCardsPage/MyCardsPage";
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import Menu from './components/Menu/Menu';
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Menu from "./components/Menu/Menu";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import { UserDetailsProvider } from "./components/Contexts/UserDetailsContext";
 
 function App() {
   return (
@@ -18,16 +19,18 @@ function App() {
         <Menu />
         <main className="flex-grow-1">
           <div className="container mt-5 mb-5">
+              <UserDetailsProvider>
             <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/my-cards" element={<MyCardsPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/" element={<MyCardsPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/my-cards" element={<MyCardsPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/" element={<LandingPage />} />
             </Routes>
+              </UserDetailsProvider>
           </div>
         </main>
-      <Footer />
+        <Footer />
       </div>
     </Router>
     // <BrowserRouter>

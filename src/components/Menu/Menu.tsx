@@ -89,12 +89,12 @@ function Menu() {
           <ul className="navbar-nav">
           {!isAuthenticated ? (
                 <>
-                  <li className="nav-item" style={{display: "flex", flexDirection: "row", alignItems: "center",}}>
+                  {/* <li className="nav-item" style={{display: "flex", flexDirection: "row", alignItems: "center",}}>
                     <Link className="nav-link" to="/login">Login</Link>
                   </li>
                   <li className="nav-item" style={{display: "flex", flexDirection: "row", alignItems: "center",}}>
                     <Link className="nav-link" to="/register">Signup</Link>
-                  </li>
+                  </li> */}
                 </>
             ) : (
                 <>

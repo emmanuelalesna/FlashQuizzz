@@ -1,5 +1,4 @@
 import React, { useReducer, useState } from "react";
-
 import LoginFormState from "../../../interfaces/ILoginFormState";
 import UserService from "../../../services/UserService";
 import { Navigate } from "react-router-dom";
@@ -28,28 +27,28 @@ function LoginForm({ userService }: { userService: UserService }) {
     password: "",
   });
 
-  const [redirectToDashboard, setRedirectToDashboard] =
-    useState<boolean>(false);
-
   function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "setEmail", payload: event?.target.value });
   }
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "setPassword", payload: event?.target.value });
   }
-
+  const [redirectToDashboard, setRedirectToDashboard] =
+    useState<boolean>(false);
   async function submit() {
     try {
-      console.log("In Submit function");
       const loginResponse = await userService.login(state);
       if (loginResponse.status == 200) {
-        console.log("Logged In");
         // Store the object in local storage
+        //   login(JSON.stringify(loginResponse.data));
         localStorage.setItem("userObject", JSON.stringify(loginResponse.data));
-        const getUserInfoResponse = await userService.getUserInfo(loginResponse.data.accessToken);
+        const getUserInfoResponse = await userService.getUserInfo(
+          loginResponse.data.accessToken
+        );
         if (getUserInfoResponse.status == 200) {
           console.log("User Info Retrieved");
           localStorage.setItem("userID", getUserInfoResponse.data.userID);
+          // setToken(getUserInfoResponse.data.accessToken);
         }
         // Redirect to home page
         // navigate('/my-cards');
@@ -67,7 +66,6 @@ function LoginForm({ userService }: { userService: UserService }) {
   if (redirectToDashboard) {
     return <Navigate to="/dashboard" />;
   }
-
   return (
     <form className="mb-6">
       <h4>&nbsp;</h4>
