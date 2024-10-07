@@ -1,7 +1,7 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import FlashcardService from "../../services/FlashCardService";
-import IFlashCard from "../../interfaces/IFlashCard";
+import { useFlashCards } from "../Contexts/FlashCardContext";
 import FlashCardComponent from "../FlashCardComponent/FlashCardComponent";
 
 function FlashCardFetcher({
@@ -9,23 +9,24 @@ function FlashCardFetcher({
 }: {
   flashCardService: FlashcardService;
 }) {
-  const [flashCards, setFlashCards] =
-    useState<IFlashCard["FlashCard"][]>([]);
+  const { flashCards, storeFlashCards } = useFlashCards();
   useEffect(() => {
     async function fetchFlashCards() {
       try {
         const response = await flashCardService.getFlashCards();
-        setFlashCards(response.data);
+        storeFlashCards(response.data);
       } catch (error) {
         console.error("Error fetching flash cards: ", error);
       }
     }
     fetchFlashCards();
-  }, [flashCardService]);
+  }, []);
   return (
     <div>
       <h3>Flash cards here:</h3>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+      <div
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
         {flashCards.length > 0 ? (
           flashCards.map((item, index) => (
             <FlashCardComponent key={index} FlashCard={item} />

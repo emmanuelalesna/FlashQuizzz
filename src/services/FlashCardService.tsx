@@ -3,6 +3,7 @@ import { url, flashCardEndpoint } from "../url.json";
 import IFlashCard from "../interfaces/IFlashCard";
 
 class FlashCardService {
+  
   getFlashCards(): Promise<AxiosResponse> {
     const userID = localStorage.getItem("userID");
     if (userID == null) {
@@ -12,7 +13,7 @@ class FlashCardService {
     if (userID == "8681bf6e-7063-464e-8223-b40145fc6873") {
       urlToGet = url + flashCardEndpoint;
     }
-      return axios.get(urlToGet);
+    return axios.get(urlToGet);
   }
 
   postFlashCard({ FlashCard }: IFlashCard): Promise<AxiosResponse> {
@@ -57,4 +58,5 @@ class FlashCardService {
     return axios.delete(url + flashCardEndpoint + "/" + id);
   }
 }
+
 export default FlashCardService;

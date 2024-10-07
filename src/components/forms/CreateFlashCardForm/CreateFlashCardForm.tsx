@@ -5,6 +5,7 @@ import IFlashCard from "../../../interfaces/IFlashCard";
 import Category from "../../../interfaces/Category";
 import Select from "react-select";
 import options from "../SelectOptions";
+import { useFlashCards } from "../../Contexts/FlashCardContext";
 
 type ActionType =
   | { type: "setQuestion"; payload: string }
@@ -39,6 +40,8 @@ function CreateFlashCardForm({
 }: {
   flashCardService: FlashCardService;
 }) {
+  const {addFlashCard} = useFlashCards();
+
   const [state, dispatch] = useReducer(formReducer, {
     FlashCardQuestion: "",
     FlashCardAnswer: "",
@@ -81,7 +84,7 @@ function CreateFlashCardForm({
       const response = await flashCardService.postFlashCard(cardToPost);
       if (response.status) {
         console.log("flash card posted");
-        window.location.reload();
+        addFlashCard(cardToPost.FlashCard);
       }
     } catch (error) {
       console.error("Error submitting flash card: ", error);

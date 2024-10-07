@@ -39,16 +39,12 @@ function LoginForm({ userService }: { userService: UserService }) {
     try {
       const loginResponse = await userService.login(state);
       if (loginResponse.status == 200) {
-        // Store the object in local storage
-        //   login(JSON.stringify(loginResponse.data));
-        localStorage.setItem("userObject", JSON.stringify(loginResponse.data));
+        window.localStorage.setItem("token", loginResponse.data.accessToken);
         const getUserInfoResponse = await userService.getUserInfo(
           loginResponse.data.accessToken
         );
         if (getUserInfoResponse.status == 200) {
-          console.log("User Info Retrieved");
-          localStorage.setItem("userID", getUserInfoResponse.data.userID);
-          // setToken(getUserInfoResponse.data.accessToken);
+          window.localStorage.setItem("userID", getUserInfoResponse.data.userID);
         }
         // Redirect to home page
         // navigate('/my-cards');
@@ -64,7 +60,7 @@ function LoginForm({ userService }: { userService: UserService }) {
   }
 
   if (redirectToDashboard) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/my-cards" />;
   }
   return (
     <form className="mb-6">
