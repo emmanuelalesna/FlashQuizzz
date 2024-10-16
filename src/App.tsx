@@ -9,7 +9,6 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Menu from "./components/Menu/Menu";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
-import { UserDetailsProvider } from "./components/Contexts/UserDetailsContext";
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
         <Menu />
         <main className="flex-grow-1">
           <div className="container mt-5 mb-5">
-              <UserDetailsProvider>
             <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
@@ -27,7 +25,6 @@ function App() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/" element={<LandingPage />} />
             </Routes>
-              </UserDetailsProvider>
           </div>
         </main>
         <Footer />
