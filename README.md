@@ -20,4 +20,6 @@ The frontend uses the React library to form a single-page application.
 
 Testing on the backend uses xUnit and Moq, while the frontend uses Jest.
 
-Each component is hosted on Microsoft Azure and can be accessed at https://red-desert-06cea4e0f.5.azurestaticapps.net (please be patient if trying to access; the resources are likely paused to converse Azure credits).
+Each component is hosted on Microsoft Azure and can be accessed [here](https://red-desert-06cea4e0f.5.azurestaticapps.net). (please be patient if trying to access; the resources are likely paused to converse Azure credits).
+
+The respository for the corresponding API can also be found [here](https://github.com/emmanuelalesna/FlashQuizzz-API).
